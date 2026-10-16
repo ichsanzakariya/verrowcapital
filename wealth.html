@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wealth Management — Verrow Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #030a12;
+    --teal-bright: #7ef0e0;
+    --teal-mid: #2aa5c9;
+    --paper: #f4f3ef;
+    --muted: rgba(244, 243, 239, 0.72);
+    --hairline: rgba(244, 243, 239, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: linear-gradient(170deg, #030a12 0%, #041220 26%, #07293c 55%, #0f4a63 80%, #146a80 100%);
+    color: var(--paper);
+    font-family: "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 26px 44px;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .brand {
+    font-family: "Instrument Serif", serif;
+    font-size: 22px;
+    letter-spacing: 0.02em;
+    color: var(--paper);
+    text-decoration: none;
+  }
+  .back {
+    color: rgba(244, 243, 239, 0.75);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+  .back:hover { color: var(--teal-bright); }
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 88px 24px 120px;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.9s ease 0.1s, transform 0.9s ease 0.1s;
+  }
+  .page.in { opacity: 1; transform: none; }
+  .num {
+    font-family: "Instrument Serif", serif;
+    font-size: 15px;
+    color: var(--teal-bright);
+    letter-spacing: 0.08em;
+    display: inline-block;
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-family: "Instrument Serif", serif;
+    font-weight: 400;
+    font-size: clamp(40px, 5.2vw, 62px);
+    line-height: 1.1;
+    margin-bottom: 18px;
+  }
+  .lead { font-size: 15px; line-height: 1.75; color: var(--muted); max-width: 620px; margin-bottom: 20px; }
+  h2 {
+    font-family: "Instrument Serif", serif;
+    font-weight: 400;
+    font-size: 26px;
+    margin: 48px 0 18px;
+  }
+  .feats { list-style: none; border-top: 1px solid var(--hairline); }
+  .feats li {
+    display: flex;
+    gap: 22px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--hairline);
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--muted);
+    transition: padding-left 0.25s ease;
+  }
+  .feats li:hover { padding-left: 10px; }
+  .feats li strong { color: var(--paper); font-weight: 600; min-width: 190px; flex-shrink: 0; font-size: 14px; }
+  .note {
+    margin-top: 40px;
+    border-left: 2px solid var(--teal-bright);
+    background: rgba(126, 240, 224, 0.05);
+    padding: 16px 20px;
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+  .cta {
+    display: inline-block;
+    margin-top: 40px;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 13px 28px;
+    border-radius: 2px;
+    text-decoration: none;
+    box-shadow: 0 6px 26px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  .cta:hover { background: #ffffff; transform: translateY(-2px); }
+  .cta-sub { display: block; margin-top: 14px; font-size: 12.5px; color: rgba(244, 243, 239, 0.5); }
+  .cta-sub a { color: var(--teal-bright); }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .page { opacity: 1; transform: none; transition: none; }
+    .feats li { transition: none; }
+    .cta { transition: none; }
+  }
+  @media (max-width: 860px) {
+    .nav { padding: 20px 24px; }
+    .page { padding: 64px 20px 90px; }
+    .feats li strong { min-width: 140px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="index.html">Verrow Capital</a>
+  <a class="back" href="index.html#services">← All services</a>
+</header>
+
+<main class="page" id="page">
+  <span class="num">01 / Wealth Management</span>
+  <h1>Portfolios built around your life.</h1>
+  <p class="lead">
+    Discretionary portfolio management for individuals and families who want their
+    capital managed with institutional discipline — around their goals, their tax
+    position, and the outcomes that actually matter to them.
+  </p>
+
+  <h2>What we manage, day to day</h2>
+  <ul class="feats">
+    <li><strong>Discretionary portfolios</strong><span>We run the portfolio for you — allocation, selection, and timing — under a written mandate you approve.</span></li>
+    <li><strong>Goal-based allocation</strong><span>Capital is structured against timelines: near-term liquidity, long-horizon growth, and everything between.</span></li>
+    <li><strong>Tax-aware management</strong><span>Position-level tax impact, harvesting, and placement decisions are part of the process, not an afterthought.</span></li>
+    <li><strong>Active rebalancing</strong><span>As markets move and life changes, the portfolio is rebalanced deliberately — never left to drift.</span></li>
+    <li><strong>Plain-language reporting</strong><span>Consolidated statements and quarterly reviews you can read without a finance degree.</span></li>
+  </ul>
+
+  <div class="note">
+    Your interests come before ours — always, and by mandate. Fees are transparent,
+    there are no proprietary products, and performance is measured against the
+    objectives we set together.
+  </div>
+
+  <a class="cta" href="consultation.html">Schedule a Consultation</a>
+  <span class="cta-sub">Not ready yet? <a href="mailto:hello@verrowcapital.com">email us</a> — or read our <a href="disclosures.html">regulatory disclosures</a>.</span>
+</main>
+
+<script>
+  const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const page = document.getElementById("page");
+  if (!prefersReduced) {
+    requestAnimationFrame(() => page.classList.add("in"));
+    setTimeout(() => page.classList.add("in"), 400);
+  } else {
+    page.classList.add("in");
+  }
+</script>
+
+</body>
+</html>
