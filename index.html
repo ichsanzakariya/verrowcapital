@@ -2071,7 +2071,7 @@
   (function buildScatter() {
     const svg = document.getElementById("scatterChart");
     if (!svg) return;
-    const W = 420, H = 320, L = 46, RT = 404, T = 26, B = 262;
+    const W = 420, H = 320, L = 58, RT = 404, T = 26, B = 262;
     const XMAX = 18, YMAX = 12;
     const px = (v) => L + (v / XMAX) * (RT - L);
     const py = (v) => B - (v / YMAX) * (B - T);
@@ -2085,25 +2085,30 @@
     ];
     const YOU = { name: "Verrow blend", vol: 9.8, ret: 7.9 };
 
+    // Both axes run on the same 3-point lattice (x 0-18, y 0-12), so the tick labels
+    // are evenly spaced on either axis and the grid cells come out square.
+    const X_LABELS = [0, 3, 6, 9, 12, 15, 18];
+    const Y_LABELS = [0, 3, 6, 9, 12];
+
     const grid = [];
     [3, 6, 9].forEach((v) => grid.push(
       '<line class="scatter-grid" x1="' + L + '" y1="' + py(v) + '" x2="' + RT + '" y2="' + py(v) + '"/>'
     ));
-    [5, 10, 15].forEach((v) => grid.push(
+    [3, 6, 9, 12, 15].forEach((v) => grid.push(
       '<line class="scatter-grid" x1="' + px(v) + '" y1="' + T + '" x2="' + px(v) + '" y2="' + B + '"/>'
     ));
     grid.push('<line x1="' + L + '" y1="' + B + '" x2="' + RT + '" y2="' + B + '" stroke="rgba(244,243,239,0.22)"/>');
     grid.push('<line x1="' + L + '" y1="' + T + '" x2="' + L + '" y2="' + B + '" stroke="rgba(244,243,239,0.22)"/>');
 
     const ticks = [];
-    [3, 6, 9].forEach((v) => ticks.push(
+    Y_LABELS.forEach((v) => ticks.push(
       '<text class="scatter-axis" x="' + (L - 10) + '" y="' + (py(v) + 3.5) + '" text-anchor="end">' + v + "%</text>"
     ));
-    [0, 5, 10, 15].forEach((v) => ticks.push(
+    X_LABELS.forEach((v) => ticks.push(
       '<text class="scatter-axis" x="' + px(v) + '" y="' + (B + 19) + '" text-anchor="middle">' + v + "%</text>"
     ));
-    ticks.push('<text class="scatter-axis" x="' + (L + (RT - L) / 2) + '" y="' + (B + 44) + '" text-anchor="middle">Risk (volatility, annualized)</text>');
-    ticks.push('<text class="scatter-axis" transform="rotate(-90 13 ' + ((T + B) / 2) + ')" x="13" y="' + ((T + B) / 2) + '" text-anchor="middle">Expected return</text>');
+    ticks.push('<text class="scatter-axis" x="' + (L + (RT - L) / 2) + '" y="' + (B + 42) + '" text-anchor="middle">Risk (volatility, annualized)</text>');
+    ticks.push('<text class="scatter-axis" transform="rotate(-90 12 ' + ((T + B) / 2) + ')" x="12" y="' + ((T + B) / 2) + '" text-anchor="middle">Expected return</text>');
 
     // Trade-off line through the public-asset blend (bonds -> blend -> equities)
     const frontier = "M" + px(5) + "," + py(3.9) + " Q" + px(9.5) + "," + py(9.45) + " " + px(15.2) + "," + py(8.8);
