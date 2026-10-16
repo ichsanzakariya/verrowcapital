@@ -924,6 +924,9 @@
     .scatter-lab { opacity: 1; transition: none; }
     .scatter-halo { animation: none; opacity: 0.6; }
     .ring-seg { transition: none; }
+    /* scroll-driven accents: show their finished state without the motion */
+    .process-list { --p: 1; }
+    .eyebrow::before { transform: scaleX(1); transition: none; }
   }
 
   /* ------------ Scroll progress bar ------------ */

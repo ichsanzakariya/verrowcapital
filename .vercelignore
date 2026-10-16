@@ -1,0 +1,9 @@
+# Files that must never be uploaded to a deployment.
+# The Vercel CLI does not honour .gitignore, so local-only files are listed here.
+index-backup.html
+.env*
+.vercel
+node_modules
+*.log
+.DS_Store
+Thumbs.db
