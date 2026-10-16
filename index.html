@@ -882,8 +882,7 @@
     .testimonial blockquote .qw { opacity: 1; }
     .newsletter button.success { animation: none; }
     .nav-links a::after { transition: none; }
-    .cycle-fill { transform: none; transition: none; }
-    .cycle-val { opacity: 1; transition: none; }
+    .uw-notes { opacity: 1; transition: none; }
     .scatter-dot { transform: none; transition: none; }
     .scatter-lab { opacity: 1; transition: none; }
     .scatter-halo { animation: none; opacity: 0.6; }
@@ -1224,72 +1223,103 @@
   .viz-legend .dot.teal { background: linear-gradient(180deg, var(--teal-bright), var(--teal-mid)); }
   .viz-legend .dot.paper { background: rgba(244, 243, 239, 0.28); }
 
-  .cycle-grid {
+  /* Resilience: drawdown chart + outcome strip */
+  .uw-viz { margin-top: 64px; }
+
+  .uw-wrap { position: relative; }
+
+  .uw-axis {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    fill: rgba(244, 243, 239, 0.45);
+  }
+
+  .uw-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    fill: rgba(244, 243, 239, 0.6);
+  }
+
+  .uw-guide { stroke: rgba(244, 243, 239, 0.14); stroke-dasharray: 3 6; }
+
+  .uw-line { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .uw-idx-line { stroke: rgba(244, 243, 239, 0.55); stroke-width: 1.4; }
+  .uw-vrw-line { stroke: var(--teal-bright); stroke-width: 2; }
+
+  .uw-notes { opacity: 0; transition: opacity 0.9s ease 0.6s; }
+  .uw-wrap.on .uw-notes { opacity: 1; }
+
+  .uw-val { font-size: 11px; font-weight: 600; }
+  .uw-val.paper { fill: rgba(244, 243, 239, 0.78); }
+  .uw-val.teal { fill: var(--teal-bright); }
+
+  .uw-lane { stroke-width: 1.4; }
+  .uw-lane.idx { stroke: rgba(244, 243, 239, 0.5); }
+  .uw-lane.vrw { stroke: var(--teal-bright); }
+
+  .uw-lane-lab { font-size: 10px; font-weight: 600; letter-spacing: 0.04em; }
+  .uw-lane-lab.idx { fill: rgba(244, 243, 239, 0.6); }
+  .uw-lane-lab.vrw { fill: var(--teal-bright); }
+
+  .uw-tip {
+    position: absolute;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+    padding: 8px 13px;
+    border-radius: 3px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    transform: translate(-50%, -100%);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: left 0.14s ease-out, top 0.14s ease-out, opacity 0.25s ease;
+  }
+
+  .uw-tip span { display: block; font-weight: 500; color: rgba(3, 10, 18, 0.62); }
+
+  .cycle-stats {
+    margin-top: 60px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 56px;
-    margin-top: 72px;
-    padding-bottom: 30px;
+    border-top: 1px solid var(--hairline);
   }
 
-  .cycle-year {
+  .cycle-stat {
+    padding: 32px 36px 0 0;
+    border-right: 1px solid var(--hairline);
+  }
+
+  .cycle-stat:last-child { border-right: none; }
+
+  .cycle-stat .value {
     font-family: "Instrument Serif", serif;
-    font-size: 22px;
-    color: var(--teal-bright);
+    font-size: clamp(38px, 3.6vw, 50px);
+    line-height: 1;
   }
 
-  .cycle h3 {
-    font-family: "Instrument Serif", serif;
-    font-weight: 400;
-    font-size: 19px;
-    color: var(--paper);
-    margin: 6px 0 28px;
-  }
+  .cycle-stat .value em { font-style: normal; font-size: 0.5em; color: var(--teal-bright); }
 
-  .cycle-track {
-    position: relative;
-    height: 190px;
-    width: fit-content;
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    border-top: 1px solid rgba(244, 243, 239, 0.2);
-  }
-
-  .cycle-col { position: relative; flex: 0 0 62px; height: 100%; }
-
-  .cycle-fill {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: var(--h);
-    border-radius: 0 0 2px 2px;
-    transform: scaleY(0);
-    transform-origin: top center;
-    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--d, 0s) + var(--bd, 0s) + 0.25s);
-  }
-
-  .cycle-fill.teal { background: linear-gradient(180deg, var(--teal-bright), var(--teal-mid)); }
-  .cycle-fill.paper { background: linear-gradient(180deg, rgba(244, 243, 239, 0.42), rgba(244, 243, 239, 0.14)); }
-
-  .reveal.visible .cycle-fill { transform: scaleY(1); }
-
-  .cycle-val {
-    position: absolute;
-    top: var(--h);
-    left: 0;
-    right: 0;
-    margin-top: 9px;
-    text-align: center;
-    font-size: 12.5px;
+  .cycle-stat .caption {
+    margin-top: 14px;
+    font-size: 11px;
     font-weight: 600;
-    color: rgba(244, 243, 239, 0.82);
-    opacity: 0;
-    transition: opacity 0.6s ease calc(var(--d, 0s) + var(--bd, 0s) + 0.95s);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(244, 243, 239, 0.58);
   }
 
-  .reveal.visible .cycle-val { opacity: 1; }
+  .cycle-stat .sub {
+    margin-top: 9px;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: rgba(244, 243, 239, 0.42);
+  }
 
   /* ------------ Responsive ------------ */
   @media (max-width: 1020px) {
@@ -1307,7 +1337,6 @@
     .process-list li:hover { padding-left: 12px; }
     .viz-grid { grid-template-columns: 1fr; gap: 64px; margin-top: 56px; }
     .cycle-intro { grid-template-columns: 1fr; gap: 28px; }
-    .cycle-grid { grid-template-columns: 1fr; gap: 52px; margin-top: 56px; }
   }
 
   @media (max-width: 860px) {
@@ -1329,8 +1358,13 @@
     .ring-row { gap: 24px; }
     .ring-svg { flex-basis: 220px; max-width: 220px; }
     .ring-legend { flex-basis: 100%; }
-    .cycle-track { height: 150px; }
     .viz-legend { flex-wrap: wrap; gap: 14px 22px; }
+    .uw-viz { margin-top: 44px; }
+    .uw-scroll { overflow-x: auto; padding-bottom: 6px; }
+    .uw-wrap { min-width: 720px; }
+    .cycle-stats { grid-template-columns: 1fr; margin-top: 44px; }
+    .cycle-stat { padding: 26px 0; border-right: none; border-bottom: 1px solid var(--hairline); }
+    .cycle-stat:last-child { border-bottom: none; }
   }
 </style>
 </head>
@@ -1541,9 +1575,9 @@
         <span class="eyebrow">Resilience</span>
         <h2>Shorter declines. Steadier recoveries.</h2>
         <p class="lead">
-          Peak-to-trough decline during each major market shock — Verrow portfolios
-          against a broad market index. Shorter bars mean less capital lost when it
-          mattered most.
+          How far below its previous peak the portfolio fell in each major market
+          shock — and how long it took to climb back. Depth of loss works against
+          you for years; speed of recovery is what keeps compounding on your side.
         </p>
       </div>
       <ul class="viz-legend">
@@ -1552,48 +1586,34 @@
       </ul>
     </div>
 
-    <div class="cycle-grid">
-      <div class="cycle reveal" style="--d: 0s">
-        <span class="cycle-year">2008</span>
-        <h3>Global Financial Crisis</h3>
-        <div class="cycle-track">
-          <div class="cycle-col" style="--h: 45%; --bd: 0s">
-            <span class="cycle-fill teal"></span><span class="cycle-val">&minus;18%</span>
-          </div>
-          <div class="cycle-col" style="--h: 92%; --bd: 0.18s">
-            <span class="cycle-fill paper"></span><span class="cycle-val">&minus;37%</span>
-          </div>
+    <div class="viz uw-viz reveal" style="--d: 0.12s">
+      <div class="viz-head"><span class="live-dot" aria-hidden="true"></span>Drawdown from prior peak &middot; 2007&ndash;2026</div>
+      <div class="uw-scroll">
+        <div class="uw-wrap" id="uwWrap">
+          <svg id="uwChart" viewBox="0 0 1000 320" role="img" aria-label="Drawdown from prior peak for the Verrow portfolio and a broad market index, 2007 to 2026"></svg>
+          <div class="uw-tip" id="uwTip"></div>
         </div>
       </div>
-
-      <div class="cycle reveal" style="--d: 0.12s">
-        <span class="cycle-year">2020</span>
-        <h3>Pandemic Shock</h3>
-        <div class="cycle-track">
-          <div class="cycle-col" style="--h: 28%; --bd: 0s">
-            <span class="cycle-fill teal"></span><span class="cycle-val">&minus;11%</span>
-          </div>
-          <div class="cycle-col" style="--h: 50%; --bd: 0.18s">
-            <span class="cycle-fill paper"></span><span class="cycle-val">&minus;20%</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="cycle reveal" style="--d: 0.24s">
-        <span class="cycle-year">2022</span>
-        <h3>Rate Shock</h3>
-        <div class="cycle-track">
-          <div class="cycle-col" style="--h: 23%; --bd: 0s">
-            <span class="cycle-fill teal"></span><span class="cycle-val">&minus;9%</span>
-          </div>
-          <div class="cycle-col" style="--h: 43%; --bd: 0.18s">
-            <span class="cycle-fill paper"></span><span class="cycle-val">&minus;17%</span>
-          </div>
-        </div>
-      </div>
+      <p class="viz-note">Illustrative, for discussion only. Drawdown measures the fall from the highest point reached; recovery is the time to return to it. Diversification does not guarantee a profit or protect against loss.</p>
     </div>
 
-    <p class="viz-note" style="margin-top: 0;">Illustrative, for discussion only. Diversification does not guarantee a profit or protect against loss.</p>
+    <div class="cycle-stats reveal" style="--d: 0.2s">
+      <div class="cycle-stat">
+        <div class="value">18<em>%</em></div>
+        <div class="caption">Worst peak-to-trough decline</div>
+        <div class="sub">against 37% for the broad market index</div>
+      </div>
+      <div class="cycle-stat">
+        <div class="value">12<em>mo</em></div>
+        <div class="caption">Average time to recover</div>
+        <div class="sub">against 24 months for the broad market index</div>
+      </div>
+      <div class="cycle-stat">
+        <div class="value">3</div>
+        <div class="caption">Major crises navigated</div>
+        <div class="sub">since 2008 — and still compounding</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -2150,6 +2170,175 @@
       tip.style.opacity = "1";
     });
     svg.addEventListener("mouseleave", clearHot);
+  })();
+
+  // Resilience: drawdown ("underwater") chart with recovery measures
+  (function buildDrawdown() {
+    const svg = document.getElementById("uwChart");
+    if (!svg) return;
+    const W = 1000, H = 320, L = 56, RT = 986, T = 34, B = 250;
+    const MAXDD = 40, MONTHS = 240; // 2007-01 .. 2026-12
+    const px = (m) => L + (m / (MONTHS - 1)) * (RT - L);
+    const py = (dd) => T + (dd / MAXDD) * (B - T);
+
+    // Illustrative drawdown paths (month index, % below prior peak)
+    const IDX_KEYS = [[0, 0], [10, 0], [16, 4], [20, 12], [23, 24], [26, 37], [30, 32], [36, 26], [44, 18], [52, 12], [62, 6], [70, 2], [74, 0], [88, 3], [92, 1], [97, 0], [103, 6], [108, 5], [112, 2], [116, 0], [134, 0], [140, 1], [143, 8], [146, 7], [149, 4], [152, 2], [155, 0], [157, 1], [158, 20], [160, 15], [162, 9], [164, 4], [166, 0], [180, 1], [183, 4], [186, 11], [188, 17], [192, 14], [196, 11], [200, 7], [204, 0], [212, 2], [216, 0], [228, 3], [234, 0], [239, 0]];
+    const VRW_KEYS = [[0, 0], [10, 0], [16, 3], [20, 9], [23, 15], [26, 18], [29, 15], [33, 11], [38, 8], [43, 3], [45, 0], [60, 0], [88, 2], [92, 1], [97, 0], [103, 3], [107, 2], [110, 0], [134, 0], [140, 1], [143, 4], [145, 3], [147, 1], [150, 0], [155, 0], [157, 1], [158, 11], [159, 8], [160, 5], [161, 2], [162, 0], [180, 1], [183, 3], [186, 6], [188, 9], [191, 8], [194, 6], [198, 2], [201, 0], [212, 1], [216, 0], [228, 2], [232, 0], [239, 0]];
+
+    // Verrow troughs are aligned with the index troughs so the hover readout and the
+    // annotation labels can never disagree by a point.
+    const CRISES = [
+      { tag: "2008 GFC", iT: 26, iR: 74, vT: 26, vR: 45 },
+      { tag: "2020 COVID", iT: 158, iR: 166, vT: 158, vR: 162 },
+      { tag: "2022 Rate shock", iT: 188, iR: 204, vT: 188, vR: 201 }
+    ];
+    const YEARS = [[0, "2007"], [36, "2010"], [72, "2013"], [108, "2016"], [144, "2019"], [180, "2022"], [228, "2026"]];
+    const I_LANE = 234, V_LANE = 214;
+
+    const sample = (keys) => {
+      const out = [];
+      let k = 0;
+      for (let m = 0; m < MONTHS; m++) {
+        while (k < keys.length - 2 && keys[k + 1][0] <= m) k++;
+        const a = keys[k], b = keys[k + 1];
+        const t = Math.min(1, Math.max(0, (m - a[0]) / (b[0] - a[0])));
+        out.push(a[1] + (b[1] - a[1]) * t);
+      }
+      return out;
+    };
+    const idx = sample(IDX_KEYS), vrw = sample(VRW_KEYS);
+
+    const curve = (arr) => {
+      let d = "M" + px(0).toFixed(1) + "," + py(arr[0]).toFixed(1);
+      for (let m = 1; m < MONTHS; m++) d += "L" + px(m).toFixed(1) + "," + py(arr[m]).toFixed(1);
+      return d;
+    };
+    const area = (arr) => curve(arr) + "L" + px(MONTHS - 1).toFixed(1) + "," + py(0) + "L" + px(0).toFixed(1) + "," + py(0) + "Z";
+    const pct = (v) => (Math.round(v) === 0 ? "0%" : "\u2212" + Math.round(v) + "%");
+
+    const parts = [];
+    parts.push('<defs>' +
+      '<linearGradient id="idxGrad" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0" stop-color="#f4f3ef" stop-opacity="0.26"/>' +
+      '<stop offset="1" stop-color="#f4f3ef" stop-opacity="0.05"/></linearGradient>' +
+      '<linearGradient id="vrwGrad" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0" stop-color="#7ef0e0" stop-opacity="0.45"/>' +
+      '<stop offset="1" stop-color="#7ef0e0" stop-opacity="0.06"/></linearGradient>' +
+      '<clipPath id="uwClip"><rect id="uwRect" x="' + L + '" y="0" width="0" height="' + H + '"/></clipPath>' +
+      "</defs>");
+
+    // peak line, gridlines, bottom axis
+    parts.push('<line x1="' + L + '" y1="' + py(0) + '" x2="' + RT + '" y2="' + py(0) + '" stroke="rgba(244,243,239,0.3)"/>');
+    [10, 20, 30].forEach((v) =>
+      parts.push('<line x1="' + L + '" y1="' + py(v) + '" x2="' + RT + '" y2="' + py(v) + '" stroke="rgba(244,243,239,0.09)" stroke-dasharray="3 6"/>')
+    );
+    [0, 10, 20, 30, 40].forEach((v) =>
+      parts.push('<text class="uw-axis" x="' + (L - 12) + '" y="' + (py(v) + 3.5) + '" text-anchor="end">' + (v === 0 ? "0%" : "\u2212" + v + "%") + "</text>")
+    );
+    YEARS.forEach(([m, yr]) =>
+      parts.push('<text class="uw-axis" x="' + px(m).toFixed(1) + '" y="' + (B + 24) + '" text-anchor="middle">' + yr + "</text>")
+    );
+
+    // crisis guides + tags
+    CRISES.forEach((c) => {
+      const x = px(c.iT).toFixed(1);
+      parts.push('<line class="uw-guide" x1="' + x + '" y1="' + T + '" x2="' + x + '" y2="' + B + '"/>');
+      parts.push('<text class="uw-tag" x="' + x + '" y="' + (T - 12) + '" text-anchor="middle">' + c.tag + "</text>");
+    });
+
+    // series (clipped so the draw sweeps left to right)
+    parts.push('<g clip-path="url(#uwClip)">' +
+      '<path fill="url(#idxGrad)" d="' + area(idx) + '"/>' +
+      '<path class="uw-line uw-idx-line" d="' + curve(idx) + '"/>' +
+      '<path fill="url(#vrwGrad)" d="' + area(vrw) + '"/>' +
+      '<path class="uw-line uw-vrw-line" d="' + curve(vrw) + '"/>' +
+      "</g>");
+
+    // annotations: trough values + recovery measures
+    const notes = [];
+    CRISES.forEach((c) => {
+      notes.push('<text class="uw-val paper" x="' + (px(c.iT) + 8).toFixed(1) + '" y="' + (py(idx[c.iT]) - 6).toFixed(1) + '" text-anchor="start">' + pct(idx[c.iT]) + "</text>");
+      notes.push('<text class="uw-val teal" x="' + (px(c.vT) - 8).toFixed(1) + '" y="' + (py(vrw[c.vT]) + 4).toFixed(1) + '" text-anchor="end">' + pct(vrw[c.vT]) + "</text>");
+
+      const tick = (x) => '<line class="uw-lane vrw" x1="' + x.toFixed(1) + '" y1="' + (V_LANE - 5) + '" x2="' + x.toFixed(1) + '" y2="' + (V_LANE + 5) + '"/>';
+      notes.push('<line class="uw-lane vrw" x1="' + px(c.vT).toFixed(1) + '" y1="' + V_LANE + '" x2="' + px(c.vR).toFixed(1) + '" y2="' + V_LANE + '"/>');
+      notes.push(tick(px(c.vT)) + tick(px(c.vR)));
+      notes.push('<text class="uw-lane-lab vrw" x="' + (px(c.vR) + 7).toFixed(1) + '" y="' + (V_LANE + 4) + '">' + (c.vR - c.vT) + " mo</text>");
+
+      const tick2 = (x) => '<line class="uw-lane idx" x1="' + x.toFixed(1) + '" y1="' + (I_LANE - 5) + '" x2="' + x.toFixed(1) + '" y2="' + (I_LANE + 5) + '"/>';
+      notes.push('<line class="uw-lane idx" x1="' + px(c.iT).toFixed(1) + '" y1="' + I_LANE + '" x2="' + px(c.iR).toFixed(1) + '" y2="' + I_LANE + '"/>');
+      notes.push(tick2(px(c.iT)) + tick2(px(c.iR)));
+      notes.push('<text class="uw-lane-lab idx" x="' + (px(c.iR) + 7).toFixed(1) + '" y="' + (I_LANE + 4) + '">' + (c.iR - c.iT) + " mo</text>");
+    });
+    parts.push('<g class="uw-notes">' + notes.join("") + "</g>");
+
+    // hover marker
+    parts.push('<line id="uwHov" x1="0" y1="' + T + '" x2="0" y2="' + B + '" stroke="rgba(126,240,224,0.45)" stroke-width="1" opacity="0"/>');
+    parts.push('<circle id="uwDotI" r="4" fill="rgba(244,243,239,0.92)" stroke="#04121c" stroke-width="2" opacity="0"/>');
+    parts.push('<circle id="uwDotV" r="4.5" fill="#7ef0e0" stroke="#04121c" stroke-width="2" opacity="0"/>');
+
+    svg.innerHTML = parts.join("");
+
+    const wrap = document.getElementById("uwWrap");
+    const rect = svg.querySelector("#uwRect");
+    const hov = svg.querySelector("#uwHov");
+    const dotI = svg.querySelector("#uwDotI");
+    const dotV = svg.querySelector("#uwDotV");
+    const tip = document.getElementById("uwTip");
+    const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const stamp = (m) => MONTH_NAMES[m % 12] + " " + (2007 + Math.floor(m / 12));
+
+    const mark = (m) => {
+      const x = px(m);
+      hov.setAttribute("x1", x); hov.setAttribute("x2", x);
+      dotI.setAttribute("cx", x); dotI.setAttribute("cy", py(idx[m]));
+      dotV.setAttribute("cx", x); dotV.setAttribute("cy", py(vrw[m]));
+      tip.innerHTML = "<strong>" + stamp(m) + "</strong><span>Verrow " + pct(vrw[m]) +
+        " &middot; Index " + pct(idx[m]) + "</span>";
+      // keep the tooltip inside the plot: clamp horizontally, flip below the point when there is no room above
+      const rw = wrap.clientWidth || W, rh = wrap.clientHeight || H;
+      const tw = tip.offsetWidth, th = tip.offsetHeight;
+      const pointY = (Math.min(py(idx[m]), py(vrw[m])) / H) * rh;
+      let left = (x / W) * rw;
+      left = Math.max(tw / 2 + 2, Math.min(rw - tw / 2 - 2, left));
+      let top = pointY - 14;
+      if (top - th < 2) top = Math.min(pointY + 14 + th, rh - 4);
+      tip.style.left = left + "px";
+      tip.style.top = top + "px";
+      tip.style.opacity = "1";
+      hov.style.opacity = "1"; dotI.style.opacity = "1"; dotV.style.opacity = "1";
+    };
+
+    const finish = () => {
+      rect.setAttribute("width", RT - L + 4);
+      wrap.classList.add("on");
+    };
+
+    whenVisible(wrap, () => {
+      if (prefersReduced) { finish(); mark(26); return; }
+      const D = 1600;
+      const t0 = performance.now();
+      const step = (now) => {
+        const p = Math.min((now - t0) / D, 1);
+        rect.setAttribute("width", (1 - Math.pow(1 - p, 3)) * (RT - L + 4));
+        if (p < 1) {
+          requestAnimationFrame(step);
+        } else {
+          wrap.classList.add("on");
+          // park the marker on the worst point, unless the pointer is on the chart
+          setTimeout(() => { if (!wrap.matches(":hover")) mark(26); }, 250);
+        }
+      };
+      requestAnimationFrame(step);
+    });
+
+    wrap.addEventListener("mousemove", (e) => {
+      const r = svg.getBoundingClientRect();
+      const vx = ((e.clientX - r.left) / r.width) * W;
+      const m = Math.max(0, Math.min(MONTHS - 1, Math.round(((vx - L) / (RT - L)) * (MONTHS - 1))));
+      mark(m);
+    });
+    wrap.addEventListener("mouseleave", () => mark(26));
   })();
 
   // Newsletter signup
