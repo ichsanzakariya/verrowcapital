@@ -1060,7 +1060,13 @@
   .testimonial blockquote .qw.lit { opacity: 1; }
 
   /* ------------ Anchor targeting ------------ */
+  /* Inner targets (the service cards) and the footer keep 92px so their first
+     row never tucks under the bar. The content sections carry 120px of their
+     own top padding - more than the 66px scrolled bar - so they land flush,
+     which lets a tall section (the charts grow with the container) fill the
+     viewport instead of losing its last rows below the fold. */
   [id] { scroll-margin-top: 92px; }
+  .section[id] { scroll-margin-top: 0; }
 
   .service:target { animation: targetFlash 1.8s ease; }
 
