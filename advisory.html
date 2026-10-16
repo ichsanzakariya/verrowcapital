@@ -117,11 +117,84 @@
   .cta:hover { background: #ffffff; transform: translateY(-2px); }
   .cta-sub { display: block; margin-top: 14px; font-size: 12.5px; color: rgba(244, 243, 239, 0.5); }
   .cta-sub a { color: var(--teal-bright); }
+  /* ------------ Motion ------------ */
+  /* Each block arrives in sequence as the page fades up, the feature rows slide
+     in behind their heading, and the links carry the same sweeps as the main
+     site. Animations rather than transitions, so hover states stay untouched. */
+  .page.in > * { animation: pageIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
+  .page.in > *:nth-child(1) { animation-delay: 0.15s; }
+  .page.in > *:nth-child(2) { animation-delay: 0.23s; }
+  .page.in > *:nth-child(3) { animation-delay: 0.31s; }
+  .page.in > *:nth-child(4) { animation-delay: 0.39s; }
+  .page.in > *:nth-child(5) { animation-delay: 0.47s; }
+  .page.in > *:nth-child(6) { animation-delay: 0.55s; }
+  .page.in > *:nth-child(7) { animation-delay: 0.63s; }
+  .page.in > *:nth-child(8) { animation-delay: 0.71s; }
+  .page.in > *:nth-child(n + 9) { animation-delay: 0.79s; }
+
+  @keyframes pageIn {
+    from { opacity: 0; filter: blur(7px); transform: translateY(16px); }
+    to   { opacity: 1; filter: blur(0); transform: translateY(0); }
+  }
+
+  .feats li {
+    opacity: 0;
+    transform: translateX(-14px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      padding-left 0.25s ease;
+  }
+
+  .page.in .feats li { opacity: 1; transform: none; }
+  .page.in .feats li:nth-child(1) { transition-delay: 0.6s, 0.6s, 0s; }
+  .page.in .feats li:nth-child(2) { transition-delay: 0.68s, 0.68s, 0s; }
+  .page.in .feats li:nth-child(3) { transition-delay: 0.76s, 0.76s, 0s; }
+  .page.in .feats li:nth-child(4) { transition-delay: 0.84s, 0.84s, 0s; }
+  .page.in .feats li:nth-child(5) { transition-delay: 0.92s, 0.92s, 0s; }
+  .page.in .feats li:nth-child(6) { transition-delay: 1s, 1s, 0s; }
+
+  .back { position: relative; }
+
+  .back::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 1px;
+    background: var(--teal-bright);
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .back:hover::after { transform: scaleX(1); transform-origin: left center; }
+
+  .cta { position: relative; overflow: hidden; }
+
+  .cta::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 45%;
+    height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(3, 10, 18, 0.16), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+    pointer-events: none;
+  }
+
+  .cta:hover::after { left: 135%; }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .page { opacity: 1; transform: none; transition: none; }
-    .feats li { transition: none; }
+    .page.in > * { animation: none; }
+    .feats li { opacity: 1; transform: none; transition: none; }
     .cta { transition: none; }
+    .back::after, .cta::after { display: none; }
   }
   @media (max-width: 860px) {
     .nav { padding: 20px 24px; }
