@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Regulatory Disclosures — Verrow Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #030a12;
+    --teal-bright: #7ef0e0;
+    --paper: #f4f3ef;
+    --muted: rgba(244, 243, 239, 0.72);
+    --hairline: rgba(244, 243, 239, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: linear-gradient(175deg, #030a12 0%, #041220 30%, #07293c 58%, #0f4a63 82%, #146a80 100%);
+    color: var(--paper);
+    font-family: "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 26px 44px;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .brand {
+    font-family: "Instrument Serif", serif;
+    font-size: 22px;
+    letter-spacing: 0.02em;
+    color: var(--paper);
+    text-decoration: none;
+  }
+
+  .back {
+    color: rgba(244, 243, 239, 0.75);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .back:hover { color: var(--teal-bright); }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 88px 24px 120px;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.9s ease 0.1s, transform 0.9s ease 0.1s;
+  }
+
+  .page.in { opacity: 1; transform: none; }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--teal-bright);
+    margin-bottom: 22px;
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 34px;
+    height: 1px;
+    background: var(--teal-bright);
+  }
+
+  h1 {
+    font-family: "Instrument Serif", serif;
+    font-weight: 400;
+    font-size: clamp(38px, 5vw, 60px);
+    line-height: 1.1;
+    margin-bottom: 14px;
+  }
+
+  .updated { font-size: 13px; color: var(--muted); margin-bottom: 44px; }
+
+  h2 {
+    font-family: "Instrument Serif", serif;
+    font-weight: 400;
+    font-size: 25px;
+    margin: 42px 0 12px;
+  }
+
+  p, li { font-size: 14.5px; line-height: 1.75; color: var(--muted); margin-bottom: 12px; }
+
+  ul { padding-left: 22px; margin-bottom: 12px; }
+
+  a { color: var(--teal-bright); }
+
+  .callout {
+    border-left: 2px solid var(--teal-bright);
+    padding: 14px 20px;
+    margin: 26px 0 8px;
+    background: rgba(126, 240, 224, 0.05);
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--paper);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .page { opacity: 1; transform: none; transition: none; }
+  }
+
+  @media (max-width: 860px) {
+    .nav { padding: 20px 24px; }
+    .page { padding: 64px 20px 90px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="index.html">Verrow Capital</a>
+  <a class="back" href="index.html">← Back to site</a>
+</header>
+
+<main class="page" id="page">
+  <span class="eyebrow">Legal</span>
+  <h1>Regulatory Disclosures</h1>
+  <p class="updated">Last updated: January 2026</p>
+
+  <div class="callout">
+    Investments involve risk, including the possible loss of principal. Past performance is not indicative of future results.
+  </div>
+
+  <h2>General Disclosure</h2>
+  <p>Verrow Capital is an investment advisory firm. Registration as an investment adviser does not imply a certain level of skill or training. The information provided on this website and in related materials is for informational purposes only and should not be construed as a recommendation, offer, or solicitation with respect to any security or investment strategy.</p>
+
+  <h2>Risk of Investing</h2>
+  <ul>
+    <li><strong>Market risk.</strong> The value of investments may fall as well as rise, and investors may receive back less than the amount invested.</li>
+    <li><strong>Private investments.</strong> Private capital strategies involve heightened risks, including illiquidity, limited transparency, long lock-up periods, and potential total loss of capital.</li>
+    <li><strong>Concentration risk.</strong> Portfolios concentrated in a limited number of positions, sectors, or asset classes may be more volatile than diversified portfolios.</li>
+  </ul>
+
+  <h2>Performance Information</h2>
+  <p>Any performance data shown on this website, including assets under advisory figures, reflects historical information believed to be reliable but is not guaranteed as to accuracy or completeness. Such figures are provided for illustration only and do not represent the experience of any individual client. Past performance is not a reliable indicator of future results, and no representation is made that any account will or is likely to achieve results similar to those shown.</p>
+
+  <h2>No Tax or Legal Advice</h2>
+  <p>Nothing on this website should be interpreted as tax or legal advice. Clients should consult their own tax and legal advisers before implementing any strategy discussed herein.</p>
+
+  <h2>Third-Party Rankings and References</h2>
+  <p>Any references to third-party institutions are for context and identification only and do not imply endorsement, partnership, or affiliation. Rankings and awards, where referenced, are based on specific criteria and time periods and should not be construed as a guarantee of future performance.</p>
+
+  <h2>Compensation and Conflicts</h2>
+  <p>Verrow Capital is compensated through advisory fees as described in its Form ADV and client agreements. Certain conflicts of interest may exist and are described in those documents, which are available upon request.</p>
+
+  <h2>Contact</h2>
+  <p>For a copy of our current Form ADV or further information, contact <a href="mailto:hello@verrowcapital.com">hello@verrowcapital.com</a> or write to Verrow Capital, 120 Harbor Street, Suite 40, New York, NY 10001.</p>
+</main>
+
+<script>
+  const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const page = document.getElementById("page");
+  if (!prefersReduced) {
+    requestAnimationFrame(() => page.classList.add("in"));
+    setTimeout(() => page.classList.add("in"), 400); // safety net if frames stall
+  } else {
+    page.classList.add("in");
+  }
+</script>
+
+</body>
+</html>
