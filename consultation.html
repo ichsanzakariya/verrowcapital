@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Schedule a Consultation — Verrow Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #030a12;
+    --teal-bright: #7ef0e0;
+    --teal-mid: #2aa5c9;
+    --paper: #f4f3ef;
+    --muted: rgba(244, 243, 239, 0.72);
+    --hairline: rgba(244, 243, 239, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: linear-gradient(170deg, #030a12 0%, #041220 26%, #07293c 55%, #0f4a63 80%, #146a80 100%);
+    color: var(--paper);
+    font-family: "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 26px 44px;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .brand {
+    font-family: "Instrument Serif", serif;
+    font-size: 22px;
+    letter-spacing: 0.02em;
+    color: var(--paper);
+    text-decoration: none;
+  }
+
+  .back {
+    color: rgba(244, 243, 239, 0.75);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .back:hover { color: var(--teal-bright); }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 88px 24px 120px;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.9s ease 0.1s, transform 0.9s ease 0.1s;
+  }
+
+  .page.in { opacity: 1; transform: none; }
+
+  .page-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 72px;
+    align-items: start;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--teal-bright);
+    margin-bottom: 22px;
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 34px;
+    height: 1px;
+    background: var(--teal-bright);
+  }
+
+  h1 {
+    font-family: "Instrument Serif", serif;
+    font-weight: 400;
+    font-size: clamp(38px, 5vw, 58px);
+    line-height: 1.1;
+    margin-bottom: 18px;
+  }
+
+  .lead { font-size: 14.5px; line-height: 1.7; color: var(--muted); max-width: 400px; }
+
+  .promise { margin-top: 36px; border-top: 1px solid var(--hairline); }
+
+  .promise div {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--hairline);
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+
+  .promise strong { color: var(--paper); font-weight: 600; display: block; margin-bottom: 3px; font-size: 14px; }
+
+  /* ---- form ---- */
+  .form-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--hairline);
+    border-radius: 4px;
+    padding: 36px 34px 34px;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .field { margin-bottom: 18px; }
+
+  label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(244, 243, 239, 0.6);
+    margin-bottom: 8px;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--hairline);
+    border-radius: 3px;
+    padding: 11px 14px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--paper);
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  select { cursor: pointer; }
+  select option { background: #04121c; color: var(--paper); }
+
+  textarea { resize: vertical; min-height: 110px; }
+
+  input::placeholder, textarea::placeholder { color: rgba(244, 243, 239, 0.35); }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: rgba(126, 240, 224, 0.55);
+    background: rgba(126, 240, 224, 0.04);
+  }
+
+  .submit-btn {
+    display: inline-block;
+    background: var(--paper);
+    color: var(--ink);
+    border: none;
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 13px 30px;
+    border-radius: 2px;
+    cursor: pointer;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 26px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+  }
+
+  .submit-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 45%;
+    height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(3, 10, 18, 0.14), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+  }
+
+  .submit-btn:hover { background: #ffffff; transform: translateY(-2px); }
+  .submit-btn:hover::after { left: 135%; }
+
+  @keyframes popIn {
+    0% { transform: scale(0.94); }
+    60% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+  }
+
+  .success-btn {
+    animation: popIn 0.45s ease;
+    background: rgba(126, 240, 224, 0.14) !important;
+    color: var(--teal-bright) !important;
+    cursor: default;
+  }
+
+  .form-note {
+    margin-top: 14px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: rgba(244, 243, 239, 0.45);
+    text-align: center;
+  }
+
+  .confirm {
+    display: none;
+    margin-top: 18px;
+    border-left: 2px solid var(--teal-bright);
+    background: rgba(126, 240, 224, 0.06);
+    padding: 14px 18px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--paper);
+  }
+
+  .confirm.show { display: block; animation: popIn 0.4s ease; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .page { opacity: 1; transform: none; transition: none; }
+    .submit-btn, .submit-btn::after { transition: none; }
+    .success-btn, .confirm.show { animation: none; }
+  }
+
+  @media (max-width: 860px) {
+    .nav { padding: 20px 24px; }
+    .page { padding: 64px 20px 90px; }
+    .page-grid { grid-template-columns: 1fr; gap: 48px; }
+    .form-row { grid-template-columns: 1fr; }
+    .form-card { padding: 28px 22px 26px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="index.html">Verrow Capital</a>
+  <a class="back" href="index.html">← Back to site</a>
+</header>
+
+<main class="page" id="page">
+  <div class="page-grid">
+    <div>
+      <span class="eyebrow">Get Started</span>
+      <h1>Schedule a Consultation</h1>
+      <p class="lead">
+        Tell us a little about where you are and where you want to go.
+        A senior advisor will reach out personally — no call centers, no pressure.
+      </p>
+      <div class="promise">
+        <div><strong>Introductory call</strong>30 minutes, free of charge, at a time that suits you.</div>
+        <div><strong>A clear picture</strong>We map your goals before we ever discuss products.</div>
+        <div><strong>No obligation</strong>Walk away with our recommendations, whatever you decide.</div>
+      </div>
+    </div>
+
+    <form class="form-card" id="consultForm">
+      <div class="form-row">
+        <div class="field">
+          <label for="name">Full Name *</label>
+          <input id="name" name="name" type="text" required placeholder="Jane Doe" />
+        </div>
+        <div class="field">
+          <label for="email">Email *</label>
+          <input id="email" name="email" type="email" required placeholder="jane@example.com" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="phone">Phone (optional)</label>
+        <input id="phone" name="phone" type="tel" placeholder="+1 (555) 000-0000" />
+      </div>
+      <div class="field">
+        <label for="service">What can we help with? *</label>
+        <select id="service" name="service" required>
+          <option value="" selected disabled>Select a service…</option>
+          <option>Wealth Management</option>
+          <option>Private Capital</option>
+          <option>Strategic Advisory</option>
+          <option>Not sure yet — advise me</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message">Anything we should know?</label>
+        <textarea id="message" name="message" placeholder="Your timeline, approximate portfolio size, questions…"></textarea>
+      </div>
+      <button class="submit-btn" type="submit">Request My Consultation</button>
+      <div class="confirm" id="confirm">
+        Request received. A senior advisor will reach out within one business day to arrange a time.
+      </div>
+      <p class="form-note">Investments involve risk. Your details are used solely to arrange your consultation.</p>
+    </form>
+  </div>
+</main>
+
+<script>
+  const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const page = document.getElementById("page");
+  if (!prefersReduced) {
+    requestAnimationFrame(() => page.classList.add("in"));
+    setTimeout(() => page.classList.add("in"), 400);
+  } else {
+    page.classList.add("in");
+  }
+
+  const form = document.getElementById("consultForm");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const button = form.querySelector(".submit-btn");
+    button.textContent = "Request Received ✓";
+    button.classList.add("success-btn");
+    button.disabled = true;
+    document.getElementById("confirm").classList.add("show");
+    form.querySelectorAll("input, select, textarea").forEach((el) => (el.disabled = true));
+    // TODO: hook a real backend here — e.g. a fetch() POST to Formspree /
+    // your own API. This static demo confirms the request client-side.
+  });
+</script>
+
+</body>
+</html>
