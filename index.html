@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Verrow Capital — Guiding Your Wealth Forward</title>
+<meta name="description" content="Verrow Capital is an independent investment advisory firm building lasting wealth through disciplined portfolio management, private capital access, and long-term strategic planning." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -881,6 +882,12 @@
     .testimonial blockquote .qw { opacity: 1; }
     .newsletter button.success { animation: none; }
     .nav-links a::after { transition: none; }
+    .cycle-fill { transform: none; transition: none; }
+    .cycle-val { opacity: 1; transition: none; }
+    .scatter-dot { transform: none; transition: none; }
+    .scatter-lab { opacity: 1; transition: none; }
+    .scatter-halo { animation: none; opacity: 0.6; }
+    .ring-seg { transition: none; }
   }
 
   /* ------------ Scroll progress bar ------------ */
@@ -1023,6 +1030,265 @@
     100% { background: transparent; transform: none; }
   }
 
+  /* ------------ Portfolio visualizations ------------ */
+  .viz-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: start;
+    margin-top: 72px;
+  }
+
+  .viz { position: relative; }
+
+  .viz-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(244, 243, 239, 0.55);
+    margin-bottom: 30px;
+  }
+
+  .viz-note {
+    margin-top: 22px;
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: rgba(244, 243, 239, 0.4);
+    max-width: 430px;
+  }
+
+  .viz svg { width: 100%; height: auto; display: block; overflow: visible; }
+
+  /* Allocation ring */
+  .ring-row { display: flex; align-items: center; gap: 38px; flex-wrap: wrap; }
+
+  .ring-svg { position: relative; flex: 0 0 210px; max-width: 210px; }
+
+  .ring-seg { transition: stroke-width 0.28s ease, opacity 0.28s ease; cursor: pointer; }
+
+  .ring-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    text-align: center;
+  }
+
+  .ring-center .val {
+    font-family: "Instrument Serif", serif;
+    font-size: 34px;
+    line-height: 1;
+    transition: opacity 0.2s ease;
+  }
+
+  .ring-center .val em { font-style: normal; font-size: 18px; color: var(--teal-bright); }
+
+  .ring-center .cap {
+    margin-top: 7px;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(244, 243, 239, 0.55);
+  }
+
+  .ring-legend {
+    list-style: none;
+    flex: 1 1 172px;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .ring-legend li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--hairline);
+    font-size: 13px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: padding-left 0.22s ease, color 0.22s ease;
+  }
+
+  .ring-legend li:hover,
+  .ring-legend li.active { padding-left: 8px; color: var(--paper); }
+
+  .ring-legend .dot { width: 8px; height: 8px; border-radius: 50%; flex: 0 0 auto; }
+
+  .ring-legend .pct {
+    margin-left: auto;
+    font-family: "Instrument Serif", serif;
+    font-size: 17px;
+    color: var(--paper);
+  }
+
+  /* Risk / return scatter */
+  .scatter-wrap { position: relative; }
+
+  .scatter-grid { stroke: rgba(244, 243, 239, 0.1); stroke-dasharray: 3 5; }
+
+  .scatter-axis {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    fill: rgba(244, 243, 239, 0.45);
+  }
+
+  .scatter-lab {
+    font-size: 10.5px;
+    fill: rgba(244, 243, 239, 0.62);
+    opacity: 0;
+    transition: opacity 0.6s ease calc(var(--i, 0) * 0.09s + 0.55s);
+  }
+
+  .scatter-lab.you-lab { fill: var(--teal-bright); }
+
+  .scatter-dot {
+    cursor: pointer;
+    transform: scale(0);
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--i, 0) * 0.09s + 0.35s), opacity 0.25s ease;
+  }
+
+  .scatter-wrap.on .scatter-dot { transform: scale(1); }
+  .scatter-wrap.on .scatter-lab { opacity: 1; }
+
+  .scatter-wrap.hot .scatter-dot { opacity: 0.3; }
+  .scatter-wrap.hot .scatter-dot.hot { opacity: 1; }
+
+  .scatter-halo {
+    fill: none;
+    stroke: rgba(126, 240, 224, 0.55);
+    stroke-width: 1.2;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: scatterPing 2.6s ease-out infinite;
+  }
+
+  @keyframes scatterPing {
+    0%   { transform: scale(0.65); opacity: 0.9; }
+    100% { transform: scale(1.7); opacity: 0; }
+  }
+
+  .scatter-tip {
+    position: absolute;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+    padding: 8px 13px;
+    border-radius: 3px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    transform: translate(-50%, -145%);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: left 0.14s ease-out, top 0.14s ease-out, opacity 0.25s ease;
+  }
+
+  .scatter-tip span { display: block; font-weight: 500; color: rgba(3, 10, 18, 0.62); }
+
+  /* Crisis cycles */
+  .cycle-intro {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 48px;
+  }
+
+  .viz-legend {
+    list-style: none;
+    display: flex;
+    gap: 26px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(244, 243, 239, 0.6);
+    padding-bottom: 6px;
+  }
+
+  .viz-legend li { display: flex; align-items: center; gap: 9px; }
+
+  .viz-legend .dot { width: 9px; height: 9px; border-radius: 2px; flex: 0 0 auto; }
+  .viz-legend .dot.teal { background: linear-gradient(180deg, var(--teal-bright), var(--teal-mid)); }
+  .viz-legend .dot.paper { background: rgba(244, 243, 239, 0.28); }
+
+  .cycle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 56px;
+    margin-top: 72px;
+    padding-bottom: 30px;
+  }
+
+  .cycle-year {
+    font-family: "Instrument Serif", serif;
+    font-size: 22px;
+    color: var(--teal-bright);
+  }
+
+  .cycle h3 {
+    font-family: "Instrument Serif", serif;
+    font-weight: 400;
+    font-size: 19px;
+    color: var(--paper);
+    margin: 6px 0 28px;
+  }
+
+  .cycle-track {
+    position: relative;
+    height: 190px;
+    width: fit-content;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    border-top: 1px solid rgba(244, 243, 239, 0.2);
+  }
+
+  .cycle-col { position: relative; flex: 0 0 62px; height: 100%; }
+
+  .cycle-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--h);
+    border-radius: 0 0 2px 2px;
+    transform: scaleY(0);
+    transform-origin: top center;
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--d, 0s) + var(--bd, 0s) + 0.25s);
+  }
+
+  .cycle-fill.teal { background: linear-gradient(180deg, var(--teal-bright), var(--teal-mid)); }
+  .cycle-fill.paper { background: linear-gradient(180deg, rgba(244, 243, 239, 0.42), rgba(244, 243, 239, 0.14)); }
+
+  .reveal.visible .cycle-fill { transform: scaleY(1); }
+
+  .cycle-val {
+    position: absolute;
+    top: var(--h);
+    left: 0;
+    right: 0;
+    margin-top: 9px;
+    text-align: center;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: rgba(244, 243, 239, 0.82);
+    opacity: 0;
+    transition: opacity 0.6s ease calc(var(--d, 0s) + var(--bd, 0s) + 0.95s);
+  }
+
+  .reveal.visible .cycle-val { opacity: 1; }
+
   /* ------------ Responsive ------------ */
   @media (max-width: 1020px) {
     .approach-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -1037,6 +1303,9 @@
     .watermark { font-size: clamp(38px, 13vw, 150px); }
     .process-list::before, .process-list::after { display: none; }
     .process-list li:hover { padding-left: 12px; }
+    .viz-grid { grid-template-columns: 1fr; gap: 64px; margin-top: 56px; }
+    .cycle-intro { grid-template-columns: 1fr; gap: 28px; }
+    .cycle-grid { grid-template-columns: 1fr; gap: 52px; margin-top: 56px; }
   }
 
   @media (max-width: 860px) {
@@ -1054,12 +1323,20 @@
     .footer-grid { padding: 48px 24px 0; gap: 36px 36px; }
     .footer-grid h4 { margin-bottom: 14px; }
     .footer-bottom { padding: 20px 24px 26px; flex-direction: column; }
+
+    .ring-row { gap: 24px; }
+    .ring-svg { flex-basis: 168px; max-width: 168px; }
+    .ring-legend { flex-basis: 100%; }
+    .cycle-track { height: 150px; }
+    .viz-legend { flex-wrap: wrap; gap: 14px 22px; }
   }
 </style>
 </head>
 <body>
 
 <div class="scroll-progress"></div>
+
+<main>
 
 <!-- ======= HERO ======= -->
 <section class="hero" id="home">
@@ -1172,6 +1449,47 @@
   </div>
 </section>
 
+<!-- ======= HOW WE INVEST ======= -->
+<section class="section" id="investing">
+  <div class="container">
+    <div class="reveal" style="max-width: 660px;">
+      <span class="eyebrow">Inside the Portfolio</span>
+      <h2>The mix — and the trade-offs behind it.</h2>
+      <p class="lead">
+        Where capital sits, and why. Every portfolio is built individually, but the
+        principles are constant: spread the risk, price it properly, and know what
+        each holding is there to do.
+      </p>
+    </div>
+
+    <div class="viz-grid">
+      <div class="viz reveal" style="--d: 0.05s">
+        <div class="viz-head"><span class="live-dot" aria-hidden="true"></span>Illustrative allocation</div>
+        <div class="ring-row" id="ringRow">
+          <div class="ring-svg">
+            <svg id="ringChart" viewBox="0 0 210 210" role="img" aria-label="Illustrative portfolio allocation by asset class"></svg>
+            <div class="ring-center">
+              <div class="val">42%</div>
+              <div class="cap">Public equities</div>
+            </div>
+          </div>
+          <ul class="ring-legend" id="ringLegend"></ul>
+        </div>
+        <p class="viz-note">Illustrative allocation only. Actual portfolios are tailored to each client's objectives, time horizon and tolerance for risk.</p>
+      </div>
+
+      <div class="viz reveal" style="--d: 0.18s">
+        <div class="viz-head"><span class="live-dot" aria-hidden="true"></span>Risk &amp; return by asset class</div>
+        <div class="scatter-wrap" id="scatterWrap">
+          <svg id="scatterChart" viewBox="0 0 420 320" role="img" aria-label="Expected return versus volatility for major asset classes, with the Verrow blend on the public-market trade-off line"></svg>
+          <div class="scatter-tip" id="scatterTip"></div>
+        </div>
+        <p class="viz-note">Forward-looking illustration, not a forecast. Higher expected return generally requires accepting more volatility — and, in private markets, less liquidity.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ======= PERFORMANCE ======= -->
 <section class="section stats" id="performance">
   <div class="container perf-grid">
@@ -1210,6 +1528,70 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ======= CYCLES ======= -->
+<section class="section" id="cycles" style="padding-top: 0;">
+  <div class="container">
+    <div class="reveal cycle-intro">
+      <div style="max-width: 620px;">
+        <span class="eyebrow">Resilience</span>
+        <h2>Shorter declines. Steadier recoveries.</h2>
+        <p class="lead">
+          Peak-to-trough decline during each major market shock — Verrow portfolios
+          against a broad market index. Shorter bars mean less capital lost when it
+          mattered most.
+        </p>
+      </div>
+      <ul class="viz-legend">
+        <li><span class="dot teal"></span>Verrow portfolio</li>
+        <li><span class="dot paper"></span>Broad market index</li>
+      </ul>
+    </div>
+
+    <div class="cycle-grid">
+      <div class="cycle reveal" style="--d: 0s">
+        <span class="cycle-year">2008</span>
+        <h3>Global Financial Crisis</h3>
+        <div class="cycle-track">
+          <div class="cycle-col" style="--h: 45%; --bd: 0s">
+            <span class="cycle-fill teal"></span><span class="cycle-val">&minus;18%</span>
+          </div>
+          <div class="cycle-col" style="--h: 92%; --bd: 0.18s">
+            <span class="cycle-fill paper"></span><span class="cycle-val">&minus;37%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cycle reveal" style="--d: 0.12s">
+        <span class="cycle-year">2020</span>
+        <h3>Pandemic Shock</h3>
+        <div class="cycle-track">
+          <div class="cycle-col" style="--h: 28%; --bd: 0s">
+            <span class="cycle-fill teal"></span><span class="cycle-val">&minus;11%</span>
+          </div>
+          <div class="cycle-col" style="--h: 50%; --bd: 0.18s">
+            <span class="cycle-fill paper"></span><span class="cycle-val">&minus;20%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cycle reveal" style="--d: 0.24s">
+        <span class="cycle-year">2022</span>
+        <h3>Rate Shock</h3>
+        <div class="cycle-track">
+          <div class="cycle-col" style="--h: 23%; --bd: 0s">
+            <span class="cycle-fill teal"></span><span class="cycle-val">&minus;9%</span>
+          </div>
+          <div class="cycle-col" style="--h: 43%; --bd: 0.18s">
+            <span class="cycle-fill paper"></span><span class="cycle-val">&minus;17%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="viz-note" style="margin-top: 0;">Illustrative, for discussion only. Diversification does not guarantee a profit or protect against loss.</p>
   </div>
 </section>
 
@@ -1330,9 +1712,25 @@
     </div>
   </footer>
 </section>
+</main>
 
 <script>
   const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Run a callback the first time an element is meaningfully in view.
+  // rAF-driven so it still fires when scroll / observer events stall.
+  function whenVisible(el, cb) {
+    if (!el) return;
+    if (prefersReduced) { cb(); return; }
+    let done = false;
+    const check = () => {
+      if (done) return;
+      const r = el.getBoundingClientRect();
+      if (r.top < innerHeight * 0.88 && r.bottom > 0) { done = true; cb(); return; }
+      requestAnimationFrame(check);
+    };
+    check();
+  }
 
   // Scroll-reveal animation
   const observer = new IntersectionObserver(
@@ -1564,6 +1962,192 @@
     });
 
     wrap.addEventListener("mouseleave", () => { if (peak) showAt(peak); });
+  })();
+
+  // Allocation ring: staggered arc sweep + hover-linked legend
+  (function buildRing() {
+    const svg = document.getElementById("ringChart");
+    if (!svg) return;
+    const CX = 105, CY = 105, R = 84, C = 2 * Math.PI * R, SW = 20;
+    const GAP = C * 0.014;
+    const SEGMENTS = [
+      { name: "Public equities", pct: 42, color: "#7ef0e0" },
+      { name: "Fixed income", pct: 26, color: "#4cc9d6" },
+      { name: "Private markets", pct: 18, color: "#2aa5c9" },
+      { name: "Real assets", pct: 8, color: "rgba(244,243,239,0.55)" },
+      { name: "Cash & other", pct: 6, color: "rgba(244,243,239,0.28)" }
+    ];
+
+    // Pre-compute each arc's length and start position on the circle
+    let acc = 0;
+    const geo = SEGMENTS.map((s) => {
+      const len = (s.pct / 100) * C;
+      const start = acc;
+      acc += len;
+      return { len: Math.max(len - GAP, 1), start: start + GAP / 2 };
+    });
+
+    svg.innerHTML =
+      '<circle cx="' + CX + '" cy="' + CY + '" r="' + R + '" fill="none" stroke="rgba(244,243,239,0.07)" stroke-width="' + SW + '"/>' +
+      '<g transform="rotate(-90 ' + CX + ' ' + CY + ')">' +
+      geo.map((g, i) =>
+        '<circle class="ring-seg" data-i="' + i + '" cx="' + CX + '" cy="' + CY + '" r="' + R + '" fill="none" stroke="' +
+        SEGMENTS[i].color + '" stroke-width="' + SW + '" stroke-dasharray="0 ' + C + '" stroke-dashoffset="' + (-g.start) + '"/>'
+      ).join("") +
+      "</g>";
+
+    const segs = Array.from(svg.querySelectorAll(".ring-seg"));
+    const legend = document.getElementById("ringLegend");
+    const row = document.getElementById("ringRow");
+    const centerVal = document.querySelector(".ring-center .val");
+    const centerCap = document.querySelector(".ring-center .cap");
+
+    legend.innerHTML = SEGMENTS.map((s, i) =>
+      '<li data-i="' + i + '"><span class="dot" style="background:' + s.color + '"></span>' +
+      s.name + '<span class="pct">' + s.pct + "%</span></li>"
+    ).join("");
+
+    const setActive = (i) => {
+      const idx = i === null ? 0 : i;
+      segs.forEach((s, k) => {
+        s.style.opacity = i === null || k === idx ? "1" : "0.3";
+        s.setAttribute("stroke-width", k === idx && i !== null ? SW + 6 : SW);
+      });
+      Array.from(legend.children).forEach((li, k) => li.classList.toggle("active", i !== null && k === idx));
+      centerVal.textContent = SEGMENTS[idx].pct + "%";
+      centerCap.textContent = SEGMENTS[idx].name;
+    };
+
+    const finish = () => {
+      segs.forEach((s, i) => s.setAttribute("stroke-dasharray", geo[i].len + " " + (C - geo[i].len)));
+      setActive(null);
+    };
+
+    whenVisible(row || svg, () => {
+      if (prefersReduced) { finish(); return; }
+      const D = 1500;
+      const t0 = performance.now();
+      const step = (now) => {
+        const p = Math.min((now - t0) / D, 1);
+        segs.forEach((s, i) => {
+          const lp = Math.max(0, Math.min(1, (p - i * 0.09) / 0.5));
+          const eased = 1 - Math.pow(1 - lp, 3);
+          const l = geo[i].len * eased;
+          s.setAttribute("stroke-dasharray", l + " " + (C - l));
+        });
+        if (p < 1) requestAnimationFrame(step); else setActive(null);
+      };
+      requestAnimationFrame(step);
+    });
+
+    segs.forEach((s) => s.addEventListener("mouseenter", () => setActive(+s.dataset.i)));
+    Array.from(legend.children).forEach((li) => li.addEventListener("mouseenter", () => setActive(+li.dataset.i)));
+    if (row) row.addEventListener("mouseleave", () => setActive(null));
+  })();
+
+  // Risk / return scatter: frontier sweep, staggered dots, hover tooltips
+  (function buildScatter() {
+    const svg = document.getElementById("scatterChart");
+    if (!svg) return;
+    const W = 420, H = 320, L = 46, RT = 404, T = 26, B = 262;
+    const XMAX = 18, YMAX = 12;
+    const px = (v) => L + (v / XMAX) * (RT - L);
+    const py = (v) => B - (v / YMAX) * (B - T);
+
+    const ASSETS = [
+      { name: "Cash", vol: 0.8, ret: 2.1, off: [11, 4, "start"] },
+      { name: "Bonds", vol: 5.0, ret: 3.9, off: [-11, 5, "end"] },
+      { name: "Real assets", vol: 9.2, ret: 6.4, off: [0, 19, "middle"] },
+      { name: "Private mkts", vol: 11.5, ret: 9.4, off: [11, -5, "start"] },
+      { name: "Equities", vol: 15.2, ret: 8.8, off: [0, 19, "middle"] }
+    ];
+    const YOU = { name: "Verrow blend", vol: 9.8, ret: 7.9 };
+
+    const grid = [];
+    [3, 6, 9].forEach((v) => grid.push(
+      '<line class="scatter-grid" x1="' + L + '" y1="' + py(v) + '" x2="' + RT + '" y2="' + py(v) + '"/>'
+    ));
+    [5, 10, 15].forEach((v) => grid.push(
+      '<line class="scatter-grid" x1="' + px(v) + '" y1="' + T + '" x2="' + px(v) + '" y2="' + B + '"/>'
+    ));
+    grid.push('<line x1="' + L + '" y1="' + B + '" x2="' + RT + '" y2="' + B + '" stroke="rgba(244,243,239,0.22)"/>');
+    grid.push('<line x1="' + L + '" y1="' + T + '" x2="' + L + '" y2="' + B + '" stroke="rgba(244,243,239,0.22)"/>');
+
+    const ticks = [];
+    [3, 6, 9].forEach((v) => ticks.push(
+      '<text class="scatter-axis" x="' + (L - 10) + '" y="' + (py(v) + 3.5) + '" text-anchor="end">' + v + "%</text>"
+    ));
+    [0, 5, 10, 15].forEach((v) => ticks.push(
+      '<text class="scatter-axis" x="' + px(v) + '" y="' + (B + 19) + '" text-anchor="middle">' + v + "%</text>"
+    ));
+    ticks.push('<text class="scatter-axis" x="' + (L + (RT - L) / 2) + '" y="' + (B + 44) + '" text-anchor="middle">Risk (volatility, annualized)</text>');
+    ticks.push('<text class="scatter-axis" transform="rotate(-90 13 ' + ((T + B) / 2) + ')" x="13" y="' + ((T + B) / 2) + '" text-anchor="middle">Expected return</text>');
+
+    // Trade-off line through the public-asset blend (bonds -> blend -> equities)
+    const frontier = "M" + px(5) + "," + py(3.9) + " Q" + px(9.5) + "," + py(9.45) + " " + px(15.2) + "," + py(8.8);
+
+    const dots = ASSETS.map((a, i) => {
+      const cx = px(a.vol), cy = py(a.ret);
+      return '<g style="--i:' + (i + 1) + '">' +
+        '<circle class="scatter-dot" cx="' + cx + '" cy="' + cy + '" r="5.5" fill="rgba(244,243,239,0.85)"' +
+        ' data-name="' + a.name + '" data-vol="' + a.vol + '" data-ret="' + a.ret + '" data-x="' + cx + '" data-y="' + cy + '"/>' +
+        '<text class="scatter-lab" x="' + (cx + a.off[0]) + '" y="' + (cy + a.off[1]) + '" text-anchor="' + a.off[2] + '">' + a.name + "</text>" +
+        "</g>";
+    }).join("");
+
+    const youX = px(YOU.vol), youY = py(YOU.ret);
+    const youMark =
+      '<g>' +
+      '<circle class="scatter-halo" cx="' + youX + '" cy="' + youY + '" r="12"/>' +
+      '<circle class="scatter-dot" style="--i:0" cx="' + youX + '" cy="' + youY + '" r="7" fill="#7ef0e0" stroke="#04121c" stroke-width="2"' +
+      ' data-name="' + YOU.name + '" data-vol="' + YOU.vol + '" data-ret="' + YOU.ret + '" data-x="' + youX + '" data-y="' + youY + '"/>' +
+      '<text class="scatter-lab you-lab" style="--i:0" x="' + (youX - 12) + '" y="' + (youY - 5) + '" text-anchor="end">' + YOU.name + "</text>" +
+      "</g>";
+
+    svg.innerHTML =
+      '<defs><clipPath id="frontierClip"><rect id="frontierRect" x="0" y="0" width="0" height="' + H + '"/></clipPath></defs>' +
+      grid.join("") +
+      '<path d="' + frontier + '" fill="none" stroke="rgba(126,240,224,0.5)" stroke-width="1.4" stroke-dasharray="5 6" clip-path="url(#frontierClip)"/>' +
+      ticks.join("") +
+      youMark + dots;
+
+    const wrap = document.getElementById("scatterWrap");
+    const rect = svg.querySelector("#frontierRect");
+    const tip = document.getElementById("scatterTip");
+
+    const reveal = () => {
+      wrap.classList.add("on");
+      if (prefersReduced) { rect.setAttribute("width", W); return; }
+      const D = 1250;
+      const t0 = performance.now();
+      const step = (now) => {
+        const p = Math.min((now - t0) / D, 1);
+        rect.setAttribute("width", (1 - Math.pow(1 - p, 3)) * (RT - L + 6) + L);
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    whenVisible(wrap, reveal);
+
+    const clearHot = () => {
+      wrap.classList.remove("hot");
+      svg.querySelectorAll(".scatter-dot.hot").forEach((d) => d.classList.remove("hot"));
+      tip.style.opacity = "0";
+    };
+
+    svg.addEventListener("mouseover", (e) => {
+      const dot = e.target.closest ? e.target.closest(".scatter-dot") : null;
+      if (!dot || !dot.dataset.name) return;
+      svg.querySelectorAll(".scatter-dot.hot").forEach((d) => d.classList.remove("hot"));
+      dot.classList.add("hot");
+      wrap.classList.add("hot");
+      tip.innerHTML = "<strong>" + dot.dataset.name + "</strong><span>Volatility " + dot.dataset.vol +
+        "% &middot; Expected return " + dot.dataset.ret + "%</span>";
+      tip.style.left = (parseFloat(dot.dataset.x) / W) * 100 + "%";
+      tip.style.top = (parseFloat(dot.dataset.y) / H) * 100 + "%";
+      tip.style.opacity = "1";
+    });
+    svg.addEventListener("mouseleave", clearHot);
   })();
 
   // Newsletter signup
