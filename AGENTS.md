@@ -6,7 +6,12 @@ When a task is finished, **stop and ask the user how to ship it**. Never
 commit or push on your own. Offer these three options:
 
 1. **Deploy now** — commit the changes and push to `origin main`.
-   Vercel auto-deploys from `main`, so the live site updates in ~1 minute.
+   Vercel auto-deploys from `main` (repo `ichsanzakariya/verrowcapital` is
+   connected to the Vercel project), so the live site updates in ~1 minute.
+   Fallback if no deployment appears — run this from the repo root:
+   `& "$env:APPDATA\npm\vercel.cmd" deploy --prod --yes`
+   (PowerShell blocks the `vercel.ps1` shim on this machine; the `.cmd`
+   shim works.)
 2. **Deploy later** — save the work as a local commit but do **not** push.
    The user reviews it (e.g. on the local preview) and can ask to deploy
    whenever they want — pushing is then the only remaining step.
@@ -37,7 +42,8 @@ before deploying.
 
 - Static site (`index.html`, `wealth.html`, `private-capital.html`,
   `advisory.html`, `consultation.html`, `privacy.html`, `terms.html`,
-  `disclosures.html`) deployed on Vercel.
+  `disclosures.html`). Live: https://verrowcapital.vercel.app — Vercel
+  project `verrowcapital`, team `portfolio-f1f8`.
 - `api/contact.js` is a Vercel serverless function — the forms POST to it.
   Email sending is a mockup until `RESEND_API_KEY` and `CONTACT_EMAIL`
   (optional `CONTACT_FROM`) are configured in Vercel.
