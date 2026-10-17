@@ -842,7 +842,9 @@
 
   .watermark {
     font-family: "Instrument Serif", serif;
-    font-size: clamp(58px, 13vw, 215px);
+    /* large wordmark: fills nearly the full viewport width, with a small,
+       even margin on each side */
+    font-size: 19.5vw;
     line-height: 1;
     text-align: center;
     letter-spacing: -0.02em;
@@ -851,7 +853,7 @@
     user-select: none;
     pointer-events: none;
     white-space: nowrap;
-    transform: translateY(-6%);
+    transform: translateY(-10%);
     margin-top: 48px;
   }
 
@@ -1539,7 +1541,6 @@
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 44px 56px; }
     .footer-grid > div:first-child,
     .footer-grid > div:last-child { grid-column: 1 / -1; }
-    .watermark { font-size: clamp(38px, 13vw, 150px); }
     .process-list::before, .process-list::after { display: none; }
     .process-list li:hover { padding-left: 12px; }
     .viz-grid { grid-template-columns: 1fr; gap: 48px; margin-top: 48px; }
@@ -2734,14 +2735,14 @@
   };
 
   // Footer watermark: slow drift with scroll — it rises gently as the wordmark
-  // travels up through the viewport, capped at 80px so it never sinks into the
-  // legal bar.
+  // travels up through the viewport, capped at 30px on top of the -10% base so
+  // it stays clear above the legal bar.
   const wm = document.querySelector(".watermark");
   const updateWatermark = () => {
     if (!wm) return;
     const r = wm.getBoundingClientRect();
-    const off = Math.max(-80, Math.min(0, (r.top - innerHeight) * 0.35));
-    wm.style.transform = "translateY(calc(-6% + " + off + "px))";
+    const off = Math.max(-30, Math.min(0, (r.top - innerHeight) * 0.35));
+    wm.style.transform = "translateY(calc(-10% + " + off + "px))";
   };
 
   if (!prefersReduced) {
