@@ -536,13 +536,6 @@
     will-change: stroke-dashoffset;
   }
 
-  .chart-area {
-    opacity: 0;
-    transition: opacity 0.9s ease 0.25s;
-  }
-
-  .chart-wrap.on .chart-area { opacity: 1; }
-
   .chart-tooltip {
     position: absolute;
     background: var(--paper);
@@ -805,23 +798,14 @@
     cursor: default;
   }
 
-  .socials {
-    display: flex;
-    gap: 16px;
-    margin-top: 26px;
-  }
-
-  .socials a {
+  .newsletter-msg {
+    margin-top: 10px;
+    font-size: 12.5px;
+    line-height: 1.5;
     color: rgba(244, 243, 239, 0.75);
-    transition: color 0.2s ease, transform 0.2s ease;
   }
 
-  .socials a:hover {
-    color: var(--teal-bright);
-    transform: translateY(-2px);
-  }
-
-  .socials svg { width: 16px; height: 16px; fill: currentColor; display: block; }
+  .newsletter-msg.error { color: #ffb4a0; }
 
   .footer-grid h4 {
     font-size: 11px;
@@ -850,6 +834,10 @@
     font-size: 13.5px;
     line-height: 1.8;
     color: rgba(244, 243, 239, 0.85);
+  }
+
+  .footer-grid address a {
+    color: var(--teal-bright);
   }
 
   .watermark {
@@ -937,7 +925,6 @@
     .hero::before, .section::before, .site-foot::before { animation: none; }
     .service::before, .newsletter button::after, .footer-grid ul a::after,
     .footer-bottom a::after { display: none; }
-    .socials a, .socials svg { transition: none; }
     .live-dot::after { animation: none; opacity: 0; }
     .service:target { animation: none; }
   }
@@ -1216,15 +1203,6 @@
 
   .footer-grid ul a:hover::after,
   .footer-bottom a:hover::after { transform: scaleX(1); transform-origin: left center; }
-
-  /* Social icons lift into a soft teal glow */
-  .socials a { transition: color 0.2s ease, transform 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
-
-  .socials a:hover { transform: translateY(-3px) scale(1.05); }
-
-  .socials svg { transition: filter 0.28s ease; }
-
-  .socials a:hover svg { filter: drop-shadow(0 6px 12px rgba(126, 240, 224, 0.35)); }
 
   /* Footer haze drifting over the footer image */
   .site-foot > * { position: relative; z-index: 1; }
@@ -1953,12 +1931,7 @@
           <input type="email" placeholder="Email address" required aria-label="Email address" />
           <button type="submit">Join Our Community</button>
         </form>
-        <div class="socials">
-          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.378 14.192 5 15.115 5H18V0h-3.808C10.596 0 9 1.583 9 4.615V8z"/></svg></a>
-          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
-          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.554V9h3.565v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-          <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zM17.083 19.77h1.833L7.084 4.126H5.117z"/></svg></a>
-        </div>
+        <p class="newsletter-msg" id="newsletterMsg" role="status" hidden></p>
       </div>
       <div class="reveal" style="--d: 0.12s">
         <h4>Navigation</h4>
@@ -1975,11 +1948,9 @@
       <div class="reveal" style="--d: 0.24s">
         <h4>Services</h4>
         <ul>
-          <li><a href="#wealth">Private Wealth Management</a></li>
-          <li><a href="#wealth">Investment Advisory</a></li>
-          <li><a href="#wealth">Retirement Planning</a></li>
-          <li><a href="#advisory">Estate &amp; Legacy Planning</a></li>
-          <li><a href="#capital">Institutional Solutions</a></li>
+          <li><a href="#wealth">Wealth Management</a></li>
+          <li><a href="#capital">Private Capital</a></li>
+          <li><a href="#advisory">Strategic Advisory</a></li>
         </ul>
       </div>
       <div class="reveal" style="--d: 0.36s">
@@ -2141,7 +2112,7 @@
   };
   updateStats();
 
-  // Live portfolio chart: datasets, draw-in animation, hover tracking, range toggle
+  // Live portfolio chart: datasets, draw-in animation, hover tracking
   (function buildChart() {
     const svg = document.getElementById("perfChart");
     if (!svg) return;
@@ -2667,16 +2638,37 @@
     wrap.addEventListener("mouseleave", () => mark(26));
   })();
 
-  // Newsletter signup
+  // Newsletter signup — posts to the /api/contact function
   const form = document.getElementById("newsletterForm");
   if (form) {
-    form.addEventListener("submit", (e) => {
+    const msg = document.getElementById("newsletterMsg");
+    const button = form.querySelector("button");
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const button = form.querySelector("button");
-      button.textContent = "You're on the list ✓";
-      button.classList.add("success");
+      if (button.disabled) return;
+      const original = button.textContent;
       button.disabled = true;
-      form.querySelector("input").value = "";
+      button.textContent = "Joining…";
+      try {
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ type: "newsletter", email: form.querySelector("input").value.trim() }),
+        });
+        if (!res.ok) throw new Error("Request failed (" + res.status + ")");
+        button.textContent = "You're on the list ✓";
+        button.classList.add("success");
+        form.querySelector("input").value = "";
+        if (msg) { msg.hidden = true; msg.textContent = ""; msg.classList.remove("error"); }
+      } catch (err) {
+        button.disabled = false;
+        button.textContent = original;
+        if (msg) {
+          msg.textContent = "Something went wrong — please try again, or email hello@verrowcapital.com.";
+          msg.classList.add("error");
+          msg.hidden = false;
+        }
+      }
     });
   }
 
@@ -2739,12 +2731,14 @@
     }
   };
 
-  // Footer watermark: slow drift with scroll (capped so it never sinks into the legal bar)
+  // Footer watermark: slow drift with scroll — it rises gently as the wordmark
+  // travels up through the viewport, capped at 80px so it never sinks into the
+  // legal bar.
   const wm = document.querySelector(".watermark");
   const updateWatermark = () => {
     if (!wm) return;
     const r = wm.getBoundingClientRect();
-    const off = Math.max(-80, Math.min(0, (r.top + r.height / 2 - innerHeight / 2) * 0.12));
+    const off = Math.max(-80, Math.min(0, (r.top - innerHeight) * 0.35));
     wm.style.transform = "translateY(calc(-6% + " + off + "px))";
   };
 

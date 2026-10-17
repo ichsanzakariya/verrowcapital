@@ -229,6 +229,11 @@
 
   .confirm.show { display: block; animation: popIn 0.4s ease; }
 
+  .confirm.error {
+    border-left-color: #ffb4a0;
+    background: rgba(255, 128, 96, 0.08);
+  }
+
   /* ------------ Motion ------------ */
   /* Intro blocks, promise rows and form fields arrive in sequence as the page
      fades up; the back link carries the main site's underline sweep. */
@@ -360,17 +365,35 @@
   }
 
   const form = document.getElementById("consultForm");
-  form.addEventListener("submit", (e) => {
+  const confirmEl = document.getElementById("confirm");
+  const confirmText = confirmEl.textContent;
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const button = form.querySelector(".submit-btn");
     if (button.disabled) return; // already submitted
-    button.textContent = "Request Received ✓";
-    button.classList.add("success-btn");
+    const data = Object.fromEntries(new FormData(form));
+    const original = button.textContent;
     button.disabled = true;
-    document.getElementById("confirm").classList.add("show");
-    form.querySelectorAll("input, select, textarea").forEach((el) => (el.disabled = true));
-    // TODO: hook a real backend here — e.g. a fetch() POST to Formspree /
-    // your own API. This static demo confirms the request client-side.
+    button.textContent = "Sending…";
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "consultation", ...data }),
+      });
+      if (!res.ok) throw new Error("Request failed (" + res.status + ")");
+      button.textContent = "Request Received ✓";
+      button.classList.add("success-btn");
+      confirmEl.textContent = confirmText;
+      confirmEl.classList.remove("error");
+      confirmEl.classList.add("show");
+      form.querySelectorAll("input, select, textarea").forEach((el) => (el.disabled = true));
+    } catch (err) {
+      button.disabled = false;
+      button.textContent = original;
+      confirmEl.textContent = "We couldn't send your request — please try again, or email hello@verrowcapital.com directly.";
+      confirmEl.classList.add("show", "error");
+    }
   });
 </script>
 
