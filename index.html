@@ -1614,6 +1614,28 @@
 
 <div class="scroll-progress"></div>
 
+<!-- The fixed header sits at body level on purpose: inside the hero it would
+     be trapped in a lower stacking context and page content could cover it. -->
+<header class="nav lr" style="--d: 0s">
+  <a class="brand" href="#home">Verrow Capital</a>
+  <nav id="primary-nav" aria-label="Primary">
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#investing">Portfolio</a></li>
+      <li><a href="#cycles">Resilience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="nav-right">
+    <a class="nav-cta" href="#contact">Get Consultation</a>
+    <button class="nav-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
 <main>
 
 <!-- ======= HERO ======= -->
@@ -1621,26 +1643,6 @@
   <div class="hero-bg-wrap"><img class="hero-bg" src="assets/hero-bg.jpg" alt="" onerror="this.style.display='none'" /></div>
   <div class="hero-shade"></div>
   <div class="hero-inner">
-
-    <header class="nav lr" style="--d: 0s">
-      <a class="brand" href="#home">Verrow Capital</a>
-      <nav id="primary-nav" aria-label="Primary">
-        <ul class="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#investing">Portfolio</a></li>
-          <li><a href="#cycles">Resilience</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="nav-right">
-        <a class="nav-cta" href="#contact">Get Consultation</a>
-        <button class="nav-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </header>
 
     <div class="hero-copy">
       <h1 class="lr" style="--d: 0.15s">Building lasting wealth with strategy and conviction.</h1>
