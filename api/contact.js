@@ -1,10 +1,10 @@
-// POST /api/contact — receives the website's forms (newsletter + consultation)
+// POST /api/contact: receives the website's forms (newsletter + consultation)
 // and forwards them by email through Resend (https://resend.com).
 //
 // Environment variables (set them in the Vercel project settings):
-//   RESEND_API_KEY  required — API key from https://resend.com/api-keys
-//   CONTACT_EMAIL   required — inbox that should receive submissions
-//   CONTACT_FROM    optional — verified sender, e.g.
+//   RESEND_API_KEY  required: API key from https://resend.com/api-keys
+//   CONTACT_EMAIL   required: inbox that should receive submissions
+//   CONTACT_FROM    optional: verified sender, e.g.
 //                   "Verrow Capital <site@verrowcapital.com>"
 //                   (defaults to Resend's onboarding sender)
 //
@@ -26,7 +26,7 @@ module.exports = async function handler(req, res) {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_EMAIL;
   if (!apiKey || !to) {
-    // Not configured yet — say so instead of pretending the message was sent.
+    // Not configured yet: say so instead of pretending the message was sent.
     return res.status(501).json({ error: "Email is not configured on this deployment" });
   }
 
@@ -54,20 +54,20 @@ module.exports = async function handler(req, res) {
     const phone = clean(body.phone, 80);
     const service = clean(body.service, 200);
     const message = clean(body.message, 4000);
-    subject = "Consultation request — " + name;
+    subject = "Consultation request | " + name;
     text = [
       "New consultation request from verrowcapital.com",
       "",
       "Name: " + name,
       "Email: " + email,
-      "Phone: " + (phone || "—"),
-      "Service: " + (service || "—"),
+      "Phone: " + (phone || "-"),
+      "Service: " + (service || "-"),
       "",
       "Message:",
-      message || "—",
+      message || "-",
     ].join("\n");
   } else {
-    subject = "Newsletter signup — " + email;
+    subject = "Newsletter signup | " + email;
     text = "New newsletter signup from verrowcapital.com: " + email;
   }
 

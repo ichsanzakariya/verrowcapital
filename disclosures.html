@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Regulatory Disclosures — Verrow Capital</title>
+<title>Verrow Capital</title>
+<link rel="icon" href="assets/favicon/favicon.ico" sizes="32x32" />
+<link rel="icon" href="assets/favicon/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="assets/favicon/favicon-32.png" type="image/png" sizes="32x32" />
+<link rel="icon" href="assets/favicon/favicon-192.png" type="image/png" sizes="192x192" />
+<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" sizes="180x180" />
+<link rel="manifest" href="site.webmanifest" />
 <meta name="description" content="Regulatory disclosures, risk factors, and important information about the illustrative figures shown on the Verrow Capital website." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -61,7 +67,7 @@
     padding: 88px 24px 120px;
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.9s ease 0.1s, transform 0.9s ease 0.1s;
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
 
   .page.in { opacity: 1; transform: none; }
@@ -119,20 +125,13 @@
   }
 
   /* ------------ Motion ------------ */
-  /* Headings and paragraphs arrive in sequence as the page fades up, and the
-     back link carries the same underline sweep as the main site. */
-  .page.in > * { animation: pageIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
-  .page.in > *:nth-child(1) { animation-delay: 0.15s; }
-  .page.in > *:nth-child(2) { animation-delay: 0.22s; }
-  .page.in > *:nth-child(3) { animation-delay: 0.29s; }
-  .page.in > *:nth-child(4) { animation-delay: 0.36s; }
-  .page.in > *:nth-child(5) { animation-delay: 0.43s; }
-  .page.in > *:nth-child(6) { animation-delay: 0.5s; }
-  .page.in > *:nth-child(7) { animation-delay: 0.57s; }
-  .page.in > *:nth-child(8) { animation-delay: 0.64s; }
-  .page.in > *:nth-child(n + 9) { animation-delay: 0.71s; }
+  /* Every block arrives as it scrolls into view, and the back link carries the
+     same underline sweep as the main site. */
+  .rv { opacity: 0; }
 
-  @keyframes pageIn {
+  .rv.on { animation: rvIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--rv-d, 0s) both; }
+
+  @keyframes rvIn {
     from { opacity: 0; filter: blur(7px); transform: translateY(16px); }
     to   { opacity: 1; filter: blur(0); transform: translateY(0); }
   }
@@ -157,7 +156,7 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .page { opacity: 1; transform: none; transition: none; }
-    .page.in > * { animation: none; }
+    .rv { opacity: 1; animation: none; }
     .back::after { display: none; }
   }
 
@@ -197,7 +196,7 @@
   <p>Any performance data shown on this website, including assets under advisory figures, reflects historical information believed to be reliable but is not guaranteed as to accuracy or completeness. Such figures are provided for illustration only and do not represent the experience of any individual client. Past performance is not a reliable indicator of future results, and no representation is made that any account will or is likely to achieve results similar to those shown.</p>
 
   <h2>Illustrative Charts and Figures</h2>
-  <p>Charts and diagrams presented on this website — including portfolio allocation, risk and return by asset class, and drawdown-and-recovery comparisons — are illustrative representations prepared for discussion purposes only. They are not based on the actual account of any client and do not represent a projection, forecast, or guarantee of future results. Allocation figures shown are representative examples; actual portfolios are constructed individually for each client based on that client's objectives, time horizon, liquidity needs, and tolerance for risk, and will differ from any example shown. Expected return and volatility figures are long-term forward-looking estimates, not promises. Drawdown and recovery paths are simplified hypothetical illustrations used to show how diversified and index portfolios have behaved during past market shocks; they are not derived from any specific account and do not depict the results of any Verrow client. Comparisons to a "broad market index" use a general composite for context and do not represent any specific investable index.</p>
+  <p>Charts and diagrams presented on this website (including portfolio allocation, risk and return by asset class, and drawdown-and-recovery comparisons) are illustrative representations prepared for discussion purposes only. They are not based on the actual account of any client and do not represent a projection, forecast, or guarantee of future results. Allocation figures shown are representative examples; actual portfolios are constructed individually for each client based on that client's objectives, time horizon, liquidity needs, and tolerance for risk, and will differ from any example shown. Expected return and volatility figures are long-term forward-looking estimates, not promises. Drawdown and recovery paths are simplified hypothetical illustrations used to show how diversified and index portfolios have behaved during past market shocks; they are not derived from any specific account and do not depict the results of any Verrow client. Comparisons to a "broad market index" use a general composite for context and do not represent any specific investable index.</p>
 
   <h2>No Tax or Legal Advice</h2>
   <p>Nothing on this website should be interpreted as tax or legal advice. Clients should consult their own tax and legal advisers before implementing any strategy discussed herein.</p>
@@ -212,6 +211,7 @@
   <p>For a copy of our current Form ADV or further information, contact <a href="mailto:hello@verrowcapital.com">hello@verrowcapital.com</a> or write to Verrow Capital, 120 Harbor Street, Suite 40, New York, NY 10001.</p>
 </main>
 
+<script src="assets/js/state.js"></script>
 <script>
   const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const page = document.getElementById("page");
@@ -221,6 +221,13 @@
   } else {
     page.classList.add("in");
   }
+
+  // Scroll reveal: the shared runtime marks each block, staggers the first
+  // screen top to bottom, and reveals the rest as it enters the viewport.
+  Verrow.reveal([
+    ".page > *:not(ul)",
+    ".page > ul > li"
+  ]);
 </script>
 
 </body>

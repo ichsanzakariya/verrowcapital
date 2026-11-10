@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Schedule a Consultation — Verrow Capital</title>
+<title>Verrow Capital</title>
+<link rel="icon" href="assets/favicon/favicon.ico" sizes="32x32" />
+<link rel="icon" href="assets/favicon/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="assets/favicon/favicon-32.png" type="image/png" sizes="32x32" />
+<link rel="icon" href="assets/favicon/favicon-192.png" type="image/png" sizes="192x192" />
+<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" sizes="180x180" />
+<link rel="manifest" href="site.webmanifest" />
 <meta name="description" content="Schedule a complimentary 30-minute consultation with a senior Verrow Capital advisor. No call centers, no pressure." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -62,7 +68,7 @@
     padding: 88px 24px 120px;
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.9s ease 0.1s, transform 0.9s ease 0.1s;
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
 
   .page.in { opacity: 1; transform: none; }
@@ -235,26 +241,24 @@
   }
 
   /* ------------ Motion ------------ */
-  /* Intro blocks, promise rows and form fields arrive in sequence as the page
-     fades up; the back link carries the main site's underline sweep. */
-  .page.in .eyebrow { animation: pageIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.18s backwards; }
-  .page.in h1 { animation: pageIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.26s backwards; }
-  .page.in .lead { animation: pageIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.34s backwards; }
-  .page.in .promise > div { animation: pageIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.42s backwards; }
-  .page.in .promise > div:nth-child(2) { animation-delay: 0.5s; }
-  .page.in .promise > div:nth-child(3) { animation-delay: 0.58s; }
-  .page.in .form-card { animation: pageIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards; }
-  .page.in .form-card > *:not(.confirm) { animation: pageIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s backwards; }
-  .page.in .form-card > *:nth-child(2) { animation-delay: 0.58s; }
-  .page.in .form-card > *:nth-child(3) { animation-delay: 0.66s; }
-  .page.in .form-card > *:nth-child(4) { animation-delay: 0.74s; }
-  .page.in .form-card > *:nth-child(5) { animation-delay: 0.82s; }
-  .page.in .form-card > *:nth-child(6) { animation-delay: 0.9s; }
-  .page.in .form-card > *:nth-child(7) { animation-delay: 0.98s; }
+  /* Every block arrives as it scrolls into view, with a short stagger between
+     neighbours; the back link carries the main site's underline sweep.
+     Animations rather than transitions, so form states stay untouched. */
+  .rv, .rv-fade { opacity: 0; }
 
-  @keyframes pageIn {
+  .rv.on { animation: rvIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) var(--rv-d, 0s) both; }
+  .rv-fade.on { animation: rvFade 0.85s cubic-bezier(0.16, 1, 0.3, 1) var(--rv-d, 0s) both; }
+
+  @keyframes rvIn {
     from { opacity: 0; filter: blur(7px); transform: translateY(16px); }
     to   { opacity: 1; filter: blur(0); transform: translateY(0); }
+  }
+
+  /* The submit button keeps its hover lift: this variant never touches
+     transform, so the animation cannot pin it in place. */
+  @keyframes rvFade {
+    from { opacity: 0; filter: blur(7px); }
+    to   { opacity: 1; filter: blur(0); }
   }
 
   .back { position: relative; }
@@ -277,8 +281,7 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .page { opacity: 1; transform: none; transition: none; }
-    .page.in .eyebrow, .page.in h1, .page.in .lead, .page.in .promise > div,
-    .page.in .form-card, .page.in .form-card > * { animation: none; }
+    .rv, .rv-fade { opacity: 1; animation: none; }
     .submit-btn, .submit-btn::after { transition: none; }
     .success-btn, .confirm.show { animation: none; }
     .back::after { display: none; }
@@ -307,7 +310,7 @@
       <h1>Schedule a Consultation</h1>
       <p class="lead">
         Tell us a little about where you are and where you want to go.
-        A senior advisor will reach out personally — no call centers, no pressure.
+        A senior advisor will reach out personally. No call centers, no pressure.
       </p>
       <div class="promise">
         <div><strong>Introductory call</strong>30 minutes, free of charge, at a time that suits you.</div>
@@ -338,7 +341,7 @@
           <option>Wealth Management</option>
           <option>Private Capital</option>
           <option>Strategic Advisory</option>
-          <option>Not sure yet — advise me</option>
+          <option>Not sure yet, advise me</option>
         </select>
       </div>
       <div class="field">
@@ -346,7 +349,7 @@
         <textarea id="message" name="message" placeholder="Your timeline, approximate portfolio size, questions…"></textarea>
       </div>
       <button class="submit-btn" type="submit">Request My Consultation</button>
-      <div class="confirm" id="confirm">
+      <div class="confirm" id="confirm" role="status" aria-live="polite">
         Request received. A senior advisor will reach out within one business day to arrange a time.
       </div>
       <p class="form-note">Investments involve risk. Your details are used solely to arrange your consultation.</p>
@@ -354,6 +357,7 @@
   </div>
 </main>
 
+<script src="assets/js/state.js"></script>
 <script>
   const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const page = document.getElementById("page");
@@ -364,34 +368,44 @@
     page.classList.add("in");
   }
 
+  // Scroll reveal: the shared runtime marks each block, staggers the first
+  // screen top to bottom, and reveals the rest as it enters the viewport.
+  Verrow.reveal([
+    ".page-grid > div > .eyebrow, .page-grid > div > h1, .page-grid > div > .lead",
+    ".promise > div",
+    ".form-card",
+    ".form-card > .form-row, .form-card > .field, .form-card > .submit-btn, .form-card > .form-note"
+  ]);
+
+  // Consultation request: idle -> sending -> sent | error, owned by the
+  // shared form machine. The confirmation box is the live region, so both
+  // outcomes are announced.
   const form = document.getElementById("consultForm");
   const confirmEl = document.getElementById("confirm");
   const confirmText = confirmEl.textContent;
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const button = form.querySelector(".submit-btn");
-    if (button.disabled) return; // already submitted
-    const data = Object.fromEntries(new FormData(form));
-    const original = button.textContent;
-    button.disabled = true;
-    button.textContent = "Sending…";
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "consultation", ...data }),
-      });
-      if (!res.ok) throw new Error("Request failed (" + res.status + ")");
-      button.textContent = "Request Received ✓";
-      button.classList.add("success-btn");
+  const submitButton = form.querySelector(".submit-btn");
+
+  Verrow.form({
+    name: "consultation-form",
+    form,
+    button: submitButton,
+    // #confirm is the page's own live region; the helper must not clear it.
+    message: null,
+    pendingLabel: "Sending…",
+    successLabel: "Request Received ✓",
+    payload: () => ({ type: "consultation", ...Object.fromEntries(new FormData(form)) }),
+    onStart: () => {
+      confirmEl.classList.remove("show", "error");
+    },
+    onSuccess: () => {
+      submitButton.classList.add("success-btn");
       confirmEl.textContent = confirmText;
       confirmEl.classList.remove("error");
       confirmEl.classList.add("show");
       form.querySelectorAll("input, select, textarea").forEach((el) => (el.disabled = true));
-    } catch (err) {
-      button.disabled = false;
-      button.textContent = original;
-      confirmEl.textContent = "We couldn't send your request — please try again, or email hello@verrowcapital.com directly.";
+    },
+    onError: () => {
+      confirmEl.textContent = "We couldn't send your request. Please try again, or email hello@verrowcapital.com directly.";
       confirmEl.classList.add("show", "error");
     }
   });

@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Verrow Capital — Guiding Your Wealth Forward</title>
+<title>Verrow Capital</title>
+<link rel="icon" href="assets/favicon/favicon.ico" sizes="32x32" />
+<link rel="icon" href="assets/favicon/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="assets/favicon/favicon-32.png" type="image/png" sizes="32x32" />
+<link rel="icon" href="assets/favicon/favicon-192.png" type="image/png" sizes="192x192" />
+<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" sizes="180x180" />
+<link rel="manifest" href="site.webmanifest" />
 <meta name="description" content="Verrow Capital is an independent investment advisory firm building lasting wealth through disciplined portfolio management, private capital access, and long-term strategic planning." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -51,85 +57,28 @@
       linear-gradient(160deg, #050e17 0%, #030a12 60%, #02131a 100%);
   }
 
-  /* Background image (drop the file at assets/hero-bg.jpg) */
-  .hero-bg-wrap {
+  /* Background loop (assets/hero-loop.webm / .mp4, poster for the first frame) */
+  .hero-media {
     position: absolute;
     inset: 0;
     z-index: 0;
     overflow: hidden;
-    animation: kenburns 26s ease-in-out infinite alternate;
     pointer-events: none;
   }
 
-  .hero-bg {
+  .hero-video {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center right;
-    transform: translate3d(var(--mx, 0), var(--my, 0), 0) scale(1.08);
-    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    object-position: 68% center;
+    background: #030a12;
     pointer-events: none;
   }
 
-  @keyframes kenburns {
-    from { transform: scale(1) translateY(0); }
-    to   { transform: scale(1.09) translateY(-1.5%); }
-  }
-
-  /* Readability shade over the image on the text side */
-  .hero-shade {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background: linear-gradient(
-      90deg,
-      rgba(3, 10, 18, 0.55) 0%,
-      rgba(3, 10, 18, 0.2) 45%,
-      rgba(3, 10, 18, 0) 68%
-    );
-    pointer-events: none;
-  }
-
-  /* Fallback: diagonal teal light beam (visible until the image is added) */
-  .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background:
-      linear-gradient(
-        245deg,
-        rgba(126, 240, 224, 0.85) 0%,
-        rgba(74, 214, 204, 0.55) 18%,
-        rgba(42, 165, 201, 0.28) 38%,
-        rgba(32, 110, 150, 0.12) 58%,
-        transparent 78%
-      );
-    clip-path: polygon(100% 12%, 100% 100%, 30% 100%);
-    filter: blur(6px);
-    opacity: 0.9;
-    pointer-events: none;
-  }
-
-  .hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background: repeating-linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.10) 0px,
-      rgba(255, 255, 255, 0.0) 3px,
-      rgba(255, 255, 255, 0.0) 10px,
-      rgba(20, 40, 55, 0.16) 12px,
-      rgba(255, 255, 255, 0.0) 22px
-    );
-    clip-path: polygon(100% 12%, 100% 100%, 30% 100%);
-    mix-blend-mode: overlay;
-    opacity: 0.7;
-    pointer-events: none;
+  @media (max-width: 760px) {
+    .hero-video { object-position: 50% center; }
   }
 
   .hero-inner {
@@ -345,25 +294,29 @@
   }
 
   .partners .marquee-track span {
-    font-family: "Instrument Serif", serif;
-    font-size: 19px;
-    letter-spacing: 0.03em;
-    color: rgba(244, 243, 239, 0.85);
-    white-space: nowrap;
-    opacity: 0.85;
-    margin-right: 72px;
+    display: flex;
+    align-items: center;
+    margin-right: 64px;
   }
 
-  .partners .marquee-track span em {
-    font-family: "Inter", sans-serif;
-    font-size: 10.5px;
-    font-style: normal;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    vertical-align: super;
-    margin-left: 4px;
+  /* Monochrome partner logos (white single-colour SVGs) */
+  .partners .marquee-track img {
+    display: block;
+    width: auto;
+    height: calc(var(--logo-h, 20px) * var(--logo-scale, 1));
+    opacity: 0.78;
+    filter: drop-shadow(0 1px 5px rgba(3, 10, 18, 0.55));
   }
+
+  .partners .marquee-track .logo-blackrock { --logo-h: 18px; }
+  .partners .marquee-track .logo-jpmorgan { --logo-h: 27px; }
+  .partners .marquee-track .logo-goldman { --logo-h: 37px; }
+  .partners .marquee-track .logo-ubs { --logo-h: 29px; }
+  .partners .marquee-track .logo-morgan-stanley { --logo-h: 22px; }
+  .partners .marquee-track .logo-northern-trust { --logo-h: 33px; }
+  .partners .marquee-track .logo-vanguard { --logo-h: 22px; }
+  .partners .marquee-track .logo-bny-mellon { --logo-h: 31px; }
+  .partners .marquee-track .logo-schroders { --logo-h: 20px; }
 
   /* ------------ Shared section styles ------------ */
   .section { padding: 120px 44px; position: relative; }
@@ -672,10 +625,172 @@
 
   .testimonial cite strong { color: var(--paper); font-weight: 600; }
 
-  /* ------------ Footer + CTA ------------ */
+  /* ------------ Contact section + footer ------------ */
+  /* A full page view: at least one screen tall, content centred in it. */
+  .section-contact {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+
+  /* The container is the flex child, so centring it centres the whole block
+     (headline, steps and details) evenly inside the screen. */
+  .section-contact > .container { width: 100%; margin: auto; }
+
+  /* Section intros: a wider measure than the default lead, so the paragraph
+     sets in three lines instead of four and reads as one thought. */
+  .section-copy { max-width: 760px; }
+  .section-copy .lead,
+  .cycle-copy .lead { max-width: 660px; }
+  .cycle-copy { max-width: 720px; }
+
+  .cta-top {
+    max-width: 660px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-top .eyebrow { justify-content: center; }
+  .cta-top h2 { margin-bottom: 18px; }
+  .cta-top .lead { margin-bottom: 34px; }
+
+  /* What happens next: three quiet steps under the call to action, so the
+     full-screen closing section answers the obvious question instead of
+     leaving the page edges empty. */
+  .cta-steps {
+    list-style: none;
+    width: 100%;
+    max-width: 1000px;
+    margin: 88px auto 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .cta-steps li {
+    padding: 32px 36px 34px 0;
+    border-right: 1px solid var(--hairline);
+  }
+
+  .cta-steps li:last-child { border-right: none; }
+
+  .cta-steps li + li { padding-left: 36px; }
+
+  .cta-steps .step {
+    display: block;
+    font-family: "Instrument Serif", serif;
+    font-style: normal;
+    font-size: 15px;
+    color: var(--teal-bright);
+    margin-bottom: 12px;
+  }
+
+  .cta-steps h3 {
+    font-family: "Instrument Serif", serif;
+    font-weight: 400;
+    font-size: 23px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .cta-steps p {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+
+  /* The practical details sit in the same three columns as the steps above,
+     so every left edge and the final right edge line up exactly. */
+  .cta-details {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 22px 0 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(244, 243, 239, 0.55);
+  }
+
+  .cta-details > * { min-width: 0; }
+
+  /* same padding as the steps: the first flush left, the rest offset, and the
+     last one flush right so the row closes on the border's edge */
+  .cta-details > :nth-child(2) { padding: 0 36px; }
+  .cta-details > :last-child { text-align: right; }
+
+  .cta-details a { color: var(--teal-bright); text-decoration: none; }
+  .cta-details a:hover { text-decoration: underline; }
+
+  /* Phones: the steps read as a compact list, and the third one (the longest)
+     drops out so the section keeps its one-screen promise. */
+  @media (max-width: 860px) {
+    .cta-steps { grid-template-columns: 1fr; margin-top: 48px; }
+    .cta-steps li { padding: 18px 0; border-right: none; border-top: 1px solid var(--hairline); }
+    .cta-steps li:first-child { border-top: none; }
+    .cta-steps li + li { padding-left: 0; }
+    .cta-steps h3 { font-size: 20px; margin-bottom: 6px; }
+    .cta-steps .step { margin-bottom: 6px; }
+    .cta-steps p { font-size: 13px; line-height: 1.55; }
+    .cta-details { grid-template-columns: 1fr; justify-items: center; text-align: center; padding-top: 18px; gap: 6px; }
+    .cta-details > :nth-child(2) { padding: 0; }
+    .cta-details > :last-child { text-align: center; }
+  }
+
+  /* Phones cannot hold three paragraphs and the call to action on one screen,
+     so there the steps become a single compact line per item. */
+  @media (max-width: 600px), (max-width: 860px) and (max-height: 900px) {
+    .cta-steps li { padding: 11px 0; }
+    .cta-steps h3 { font-size: 17px; margin-bottom: 0; }
+    .cta-steps p { display: none; }
+    .cta-steps .step { margin-bottom: 1px; font-size: 12px; }
+    .cta-steps { margin-top: 32px; }
+    .cta-details { padding-top: 14px; gap: 8px 18px; }
+    .cta-details span, .cta-details a { font-size: 11px; }
+    .section-contact { padding-top: 72px; padding-bottom: 48px; }
+  }
+
+  /* Short windows: the closing section still has to hold a whole screen, so
+     the supporting steps give way and only the call to action stays. */
+  @media (max-height: 760px) and (min-width: 861px) {
+    .cta-steps { margin-top: 48px; }
+    .cta-steps li { padding-top: 22px; padding-bottom: 24px; }
+    .cta-steps h3 { font-size: 20px; margin-bottom: 8px; }
+    .cta-details { padding-top: 16px; }
+  }
+
+  @media (max-height: 620px) and (min-width: 861px) {
+    .cta-steps { display: none; }
+    .cta-details { padding-top: 28px; }
+  }
+
+  /* ------------ Footer ------------ */
+  /* A full page view like the contact section: exactly one screen tall. The
+     link columns start below the fixed bar (so their headings are never
+     tucked under it), the legal bar sits on the bottom line, and the wordmark
+     fills everything in between. */
   .site-foot {
     position: relative;
     overflow: hidden;
+    --foot-gutter: 56px;
+    padding-top: 108px;
+    box-sizing: border-box;
+    /* dvh follows a phone's collapsing browser chrome, so the footer always
+       ends exactly at the visible bottom of the screen */
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
     color: var(--paper);
     background:
       linear-gradient(180deg, rgba(3, 10, 18, 0.4) 0%, rgba(3, 10, 18, 0.12) 38%, rgba(3, 10, 18, 0) 65%),
@@ -683,28 +798,14 @@
       linear-gradient(165deg, #081527 0%, #0d3d5a 42%, #1e93b8 72%, #35d8c4 105%);
   }
 
-  .site-foot .cta-top {
-    max-width: 660px;
-    margin: 0 auto;
-    padding: 130px 24px 96px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  /* Windows too short to hold the footer on one screen keep a natural height
+     instead of crushing the wordmark. */
+  @media (max-height: 599px) {
+    .site-foot { height: auto; min-height: 100vh; min-height: 100dvh; }
   }
 
-  .site-foot .cta-top .eyebrow { color: var(--teal-bright); }
-
-  .site-foot h2 {
-    color: var(--paper);
-    margin-bottom: 18px;
-    max-width: 600px;
-  }
-
-  .site-foot .lead {
-    color: var(--muted);
-    margin-bottom: 34px;
-    max-width: 460px;
+  @media (max-width: 860px) {
+    .site-foot { padding-top: 96px; }
   }
 
   .btn-light {
@@ -727,13 +828,28 @@
   }
 
   .footer-grid {
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 64px 44px 0;
-    display: grid;
-    grid-template-columns: 1.6fr 0.8fr 1fr 1fr;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: var(--foot-gutter) 44px;
+  }
+
+  /* The link columns hold the top of the card while the wordmark takes up
+     whatever height is left below them. */
+  .footer-cols {
+    display: flex;
     gap: 56px;
   }
+
+  .footer-cols > div:nth-child(1) { flex: 1.6 1 0%; }
+  .footer-cols > div:nth-child(2) { flex: 0.8 1 0%; }
+  .footer-cols > div:nth-child(3) { flex: 1 1 0%; }
+  .footer-cols > div:nth-child(4) { flex: 1 1 0%; }
 
   .footer-grid .tagline {
     font-family: "Instrument Serif", serif;
@@ -842,9 +958,10 @@
 
   .watermark {
     font-family: "Instrument Serif", serif;
-    /* large wordmark: fills nearly the full viewport width, with a small,
-       even margin on each side */
-    font-size: 19.5vw;
+    /* full-bleed wordmark: scripted to the footer's measure. Text set in
+       "em" pairs with this fallback, so the script can work in multiples of
+       the font size and leave vertical centring to flexbox. */
+    font-size: min(19.5vw, 20em);
     line-height: 1;
     text-align: center;
     letter-spacing: -0.02em;
@@ -853,8 +970,49 @@
     user-select: none;
     pointer-events: none;
     white-space: nowrap;
+    /* fallback only: script centres it inside the footer column */
     transform: translateY(-10%);
-    margin-top: 48px;
+    margin-top: 8px;
+  }
+
+  /* The wordmark fills the space between the link grid and the legal bar.
+     The frame takes all the height that is left over and the script sets
+     --wm-pad so the letters sit a small even gap from the text above and
+     below them. */
+  /* Laid over the space rather than taking part in the flex flow: the link
+     columns stay pinned to the top and the legal bar to the bottom, and the
+     wordmark can never push either of them around. The script sets its top
+     and height to exactly that space. */
+  .watermark.frame {
+    position: absolute;
+    /* spans the whole footer, not just the 1200px column the grid caps at */
+    left: 0;
+    right: 0;
+    top: 0;
+    padding: 0;
+    color: rgba(244, 243, 239, 0.2);
+    /* a single grid cell; the script places the text inside it by the exact
+       height of its ink, so no font metrics can push it off centre */
+    display: grid;
+    align-items: start;
+    justify-items: center;
+    transform: none;
+    margin-top: 0;
+    line-height: 1;
+    overflow: visible;
+  }
+
+  .watermark.frame span {
+    display: block;
+    line-height: 1;
+    text-align: center;
+    margin-top: var(--wm-offset, 0px);
+    /* Paint the letters fully opaque, then fade the whole line once. With a
+       20% alpha ink, the antialiased edges of two touching glyphs blend on top
+       of each other and leave a brighter dot at the join; compositing the line
+       as one layer keeps the wordmark perfectly even. */
+    color: rgb(244, 243, 239);
+    opacity: 0.2;
   }
 
   .footer-bottom {
@@ -893,15 +1051,14 @@
   .reveal.visible { opacity: 1; transform: none; }
 
   /* Fade-only variant (elements whose transform is JS-driven) */
-  .reveal-fade { opacity: 0; transition: opacity 1.2s ease var(--d, 0s); }
+  .reveal-fade { opacity: 0; transition: opacity 1.2s ease var(--d, 0s), transform 0.4s ease; }
   .reveal-fade.visible { opacity: 1; }
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .reveal, .reveal-fade { opacity: 1; transform: none; transition: none; }
     .lr { opacity: 1; animation: none; }
-    .marquee-track, .hero-bg-wrap { animation: none; }
-    .hero-bg { transform: scale(1.08); transition: none; }
+    .marquee-track { animation: none; }
     .chart-months span, .chart-months span.in { opacity: 1; transform: translateX(-50%); transition: none; }
     .testimonial blockquote .qw { opacity: 1; }
     .newsletter button.success { animation: none; }
@@ -924,7 +1081,7 @@
       transform: none;
       transition: none;
     }
-    .hero::before, .section::before, .site-foot::before { animation: none; }
+    .section::before, .site-foot::before { animation: none; }
     .service::before, .newsletter button::after, .footer-grid ul a::after,
     .footer-bottom a::after { display: none; }
     .live-dot::after { animation: none; opacity: 0; }
@@ -1140,14 +1297,6 @@
     to   { opacity: 1; }
   }
 
-  /* Slow drift on the hero light beam */
-  .hero::before { animation: beamDrift 28s ease-in-out infinite alternate; }
-
-  @keyframes beamDrift {
-    from { opacity: 0.72; transform: translate3d(0, 0, 0) scale(1); }
-    to   { opacity: 1;    transform: translate3d(-2%, -1.5%, 0) scale(1.05); }
-  }
-
   /* Card sheen sweeping across on hover, under the existing spotlight */
   .service { overflow: hidden; }
 
@@ -1209,6 +1358,7 @@
   /* Footer haze drifting over the footer image */
   .site-foot > * { position: relative; z-index: 1; }
 
+  /* Slow drifting glow, kept behind the content. */
   .site-foot::before {
     content: "";
     position: absolute;
@@ -1272,6 +1422,10 @@
     color: rgba(244, 243, 239, 0.4);
     max-width: 430px;
   }
+
+  /* A note under a full-width chart gets the chart's own measure, so it reads
+     in two or three short lines instead of a narrow column. */
+  .viz-note.viz-note-wide { max-width: 960px; }
 
   .viz svg { width: 100%; height: auto; display: block; overflow: visible; }
 
@@ -1538,9 +1692,13 @@
     .perf-grid { grid-template-columns: 1fr; gap: 48px; }
     .process-list li { grid-template-columns: 60px 1fr; }
     .process-list p { grid-column: 2; }
-    .footer-grid { grid-template-columns: 1fr 1fr; gap: 44px 56px; }
-    .footer-grid > div:first-child,
-    .footer-grid > div:last-child { grid-column: 1 / -1; }
+    /* Phones: two columns of links instead of a long stack, so the footer
+       still fits a single screen. */
+    .footer-cols { flex-wrap: wrap; gap: 30px 24px; }
+    .footer-cols > div:nth-child(1) { flex: 1 1 100%; }
+    .footer-cols > div:nth-child(2) { flex: 1 1 40%; }
+    .footer-cols > div:nth-child(3) { flex: 1 1 40%; }
+    .footer-cols > div:nth-child(4) { flex: 1 1 100%; }
     .process-list::before, .process-list::after { display: none; }
     .process-list li:hover { padding-left: 12px; }
     .viz-grid { grid-template-columns: 1fr; gap: 48px; margin-top: 48px; }
@@ -1586,13 +1744,14 @@
 
     .hero-copy { padding: 110px 24px 32px; }
     .partners { padding: 24px 24px 32px; }
-    .partners .marquee-track span { margin-right: 40px; font-size: 16px; }
+    .partners .marquee-track span { margin-right: 40px; }
+    .partners .marquee-track img { --logo-scale: 0.82; opacity: 0.85; }
 
     .chart-months span { font-size: 9px; letter-spacing: 0.02em; white-space: nowrap; }
     .perf-head { flex-wrap: wrap; }
     .section { padding: 88px 24px; }
-    .site-foot .cta-top { padding: 90px 20px 70px; }
-    .footer-grid { padding: 48px 24px 0; gap: 36px 36px; }
+    .section-contact { padding-top: 72px; padding-bottom: 72px; }
+    .footer-grid { padding: var(--foot-gutter) 24px; gap: 36px; }
     .footer-grid h4 { margin-bottom: 14px; }
     .footer-bottom { padding: 20px 24px 26px; flex-direction: column; }
 
@@ -1605,9 +1764,41 @@
     .cycle-stats { grid-template-columns: 1fr; }
   }
 
+  /* Narrow phones: the footer has to hold a whole screen, so its block
+     spacing tightens with the screen. */
   @media (max-width: 460px) {
+    .site-foot { padding-top: 84px; --foot-gutter: 24px; }
     .brand { font-size: 19px; }
     .nav-cta { font-size: 11px; padding: 8px 13px; }
+    .footer-grid { padding: var(--foot-gutter) 20px 24px; gap: 24px; }
+    .footer-cols { gap: 22px 20px; }
+    .footer-grid .tagline { font-size: 21px; }
+    .footer-grid h4 { margin-bottom: 10px; }
+    .footer-grid ul { gap: 7px; }
+    .footer-bottom { padding: 14px 20px 16px; gap: 6px; }
+  }
+
+  @media (max-height: 700px) and (max-width: 460px) {
+    .footer-grid { padding: var(--foot-gutter) 20px 16px; gap: 16px; }
+    .footer-cols > div:nth-child(1) { display: none; }
+    .footer-bottom { padding: 10px 20px 12px; }
+  }
+
+  /* The legal bar stacks neatly on phones instead of running off the edge. */
+  @media (max-width: 860px) {
+    .footer-bottom { flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+    .footer-bottom nav { flex-wrap: wrap; justify-content: center; gap: 4px 16px; }
+    .footer-bottom { font-size: 11px; }
+  }
+
+  /* ------------ Contact section backdrop ------------ */
+  /* The closing full-screen section sits near the end of the page gradient,
+     where it would otherwise be a flat mid-teal. A fixed backdrop keeps it a
+     dark page of its own, distinct from the footer below. */
+  .section-contact {
+    background:
+      radial-gradient(90% 70% at 22% 18%, rgba(42, 165, 201, 0.16), transparent 62%),
+      linear-gradient(180deg, #040d15 0%, #071a26 52%, #0a2533 100%);
   }
 </style>
 </head>
@@ -1641,15 +1832,20 @@
 
 <!-- ======= HERO ======= -->
 <section class="hero" id="home">
-  <div class="hero-bg-wrap"><img class="hero-bg" src="assets/hero-bg.jpg" alt="" onerror="this.style.display='none'" /></div>
-  <div class="hero-shade"></div>
+  <div class="hero-media" aria-hidden="true">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto"
+           poster="assets/hero-loop-poster.jpg" tabindex="-1">
+      <source src="assets/hero-loop.webm" type="video/webm" />
+      <source src="assets/hero-loop.mp4" type="video/mp4" />
+    </video>
+  </div>
   <div class="hero-inner">
 
     <div class="hero-copy">
       <h1 class="lr" style="--d: 0.15s">Building lasting wealth with strategy and conviction.</h1>
       <p class="lr" style="--d: 0.3s">
         Tailored portfolio management, private capital access, and long-horizon
-        planning — designed to move your wealth forward with clarity and confidence.
+        planning, designed to move your wealth forward with clarity and confidence.
       </p>
       <a class="btn lr" href="#contact" style="--d: 0.45s">Get Consultation</a>
     </div>
@@ -1658,26 +1854,26 @@
       <span class="label">Trusted by</span>
       <div class="marquee" role="list" aria-label="Partner firms">
         <div class="marquee-track">
-          <span role="listitem">BlackRock</span>
-          <span role="listitem">J.P.&nbsp;Morgan</span>
-          <span role="listitem">Goldman&nbsp;Sachs</span>
-          <span role="listitem">UBS</span>
-          <span role="listitem">Morgan&nbsp;Stanley</span>
-          <span role="listitem">Northern&nbsp;Trust</span>
-          <span role="listitem">Vanguard</span>
-          <span role="listitem">BNY&nbsp;Mellon</span>
-          <span role="listitem">Schroders</span>
+          <span role="listitem"><img class="logo-blackrock" src="assets/logos/blackrock.svg" alt="BlackRock" width="152" height="22" /></span>
+          <span role="listitem"><img class="logo-jpmorgan" src="assets/logos/jp-morgan.svg" alt="J.P. Morgan" width="234" height="48" /></span>
+          <span role="listitem"><img class="logo-goldman" src="assets/logos/goldman-sachs.svg" alt="Goldman Sachs" width="193" height="85" /></span>
+          <span role="listitem"><img class="logo-ubs" src="assets/logos/ubs.svg" alt="UBS" width="300" height="110" /></span>
+          <span role="listitem"><img class="logo-morgan-stanley" src="assets/logos/morgan-stanley.svg" alt="Morgan Stanley" width="1332" height="191" /></span>
+          <span role="listitem"><img class="logo-northern-trust" src="assets/logos/northern-trust.svg" alt="Northern Trust" width="250" height="78" /></span>
+          <span role="listitem"><img class="logo-vanguard" src="assets/logos/vanguard.svg" alt="Vanguard" width="127" height="27" /></span>
+          <span role="listitem"><img class="logo-bny-mellon" src="assets/logos/bny-mellon.svg" alt="BNY Mellon" width="403" height="53" /></span>
+          <span role="listitem"><img class="logo-schroders" src="assets/logos/schroders.svg" alt="Schroders" width="291" height="52" /></span>
         </div>
         <div class="marquee-track" aria-hidden="true">
-          <span>BlackRock</span>
-          <span>J.P.&nbsp;Morgan</span>
-          <span>Goldman&nbsp;Sachs</span>
-          <span>UBS</span>
-          <span>Morgan&nbsp;Stanley</span>
-          <span>Northern&nbsp;Trust</span>
-          <span>Vanguard</span>
-          <span>BNY&nbsp;Mellon</span>
-          <span>Schroders</span>
+          <span><img class="logo-blackrock" src="assets/logos/blackrock.svg" alt="" width="152" height="22" /></span>
+          <span><img class="logo-jpmorgan" src="assets/logos/jp-morgan.svg" alt="" width="234" height="48" /></span>
+          <span><img class="logo-goldman" src="assets/logos/goldman-sachs.svg" alt="" width="193" height="85" /></span>
+          <span><img class="logo-ubs" src="assets/logos/ubs.svg" alt="" width="300" height="110" /></span>
+          <span><img class="logo-morgan-stanley" src="assets/logos/morgan-stanley.svg" alt="" width="1332" height="191" /></span>
+          <span><img class="logo-northern-trust" src="assets/logos/northern-trust.svg" alt="" width="250" height="78" /></span>
+          <span><img class="logo-vanguard" src="assets/logos/vanguard.svg" alt="" width="127" height="27" /></span>
+          <span><img class="logo-bny-mellon" src="assets/logos/bny-mellon.svg" alt="" width="403" height="53" /></span>
+          <span><img class="logo-schroders" src="assets/logos/schroders.svg" alt="" width="291" height="52" /></span>
         </div>
       </div>
     </footer>
@@ -1692,14 +1888,14 @@
       <span class="eyebrow">Our Approach</span>
       <h2>Discipline first.<br />Returns follow.</h2>
       <p class="lead">
-        We don't chase markets — we build portfolios around your life, your
+        We don't chase markets. We build portfolios around your life, your
         timelines, and the things you want your wealth to do. Every decision is
         grounded in research, managed for risk, and reviewed with you in plain
         language.
       </p>
     </div>
     <ul class="approach-points">
-      <li><strong>Fiduciary duty</strong><span>Your interests come before ours — always, and by mandate.</span></li>
+      <li><strong>Fiduciary duty</strong><span>Your interests come before ours, always and by mandate.</span></li>
       <li><strong>Long-term view</strong><span>We invest across decades, not news cycles.</span></li>
       <li><strong>Radical clarity</strong><span>Fees, risks, and performance you can actually understand.</span></li>
     </ul>
@@ -1717,7 +1913,7 @@
       <div class="service reveal" id="wealth" style="--d: 0s">
         <span class="num">01</span>
         <h3>Wealth Management</h3>
-        <p>Discretionary portfolio management built around your goals, tax position, and appetite for risk — actively rebalanced as life changes.</p>
+        <p>Discretionary portfolio management built around your goals, tax position, and appetite for risk, actively rebalanced as life changes.</p>
         <a href="wealth.html">Explore <span class="arrow">→</span></a>
       </div>
       <div class="service reveal" id="capital" style="--d: 0.12s">
@@ -1729,7 +1925,7 @@
       <div class="service reveal" id="advisory" style="--d: 0.24s">
         <span class="num">03</span>
         <h3>Strategic Advisory</h3>
-        <p>Estate structure, liquidity events, and multi-generational planning — coordinated with your counsel and accountants.</p>
+        <p>Estate structure, liquidity events, and multi-generational planning, coordinated with your counsel and accountants.</p>
         <a href="advisory.html">Explore <span class="arrow">→</span></a>
       </div>
     </div>
@@ -1739,13 +1935,13 @@
 <!-- ======= HOW WE INVEST ======= -->
 <section class="section" id="investing">
   <div class="container">
-    <div class="reveal" style="max-width: 660px;">
+    <div class="reveal section-copy">
       <span class="eyebrow">Inside the Portfolio</span>
-      <h2>The mix — and the trade-offs behind it.</h2>
+      <h2>The mix and the trade-offs behind it.</h2>
       <p class="lead">
-        Where capital sits, and why. Every portfolio is built individually, but the
+        Where capital sits, and why. Each portfolio is built individually, but the
         principles are constant: spread the risk, price it properly, and know what
-        each holding is there to do.
+        every holding is there to do.
       </p>
     </div>
 
@@ -1771,7 +1967,7 @@
           <svg id="scatterChart" viewBox="0 0 420 320" role="img" aria-label="Expected return versus volatility for major asset classes, with the Verrow blend on the public-market trade-off line"></svg>
           <div class="scatter-tip" id="scatterTip"></div>
         </div>
-        <p class="viz-note">Forward-looking illustration, not a forecast. Higher expected return generally requires accepting more volatility — and, in private markets, less liquidity.</p>
+        <p class="viz-note">Forward-looking illustration, not a forecast. Higher expected return generally requires accepting more volatility, and in private markets, less liquidity.</p>
       </div>
     </div>
   </div>
@@ -1790,7 +1986,7 @@
         <div class="chart-tooltip" id="chartTooltip"></div>
       </div>
       <div class="chart-months" id="chartMonths"></div>
-      <p class="chart-note">Built through the 2008 financial crisis — disciplined through every cycle since.</p>
+      <p class="chart-note">Built through the 2008 financial crisis, disciplined through every cycle since.</p>
     </div>
     <div class="perf-stat reveal" style="--d: 0.15s">
       <span class="eyebrow">Assets Under Advisory</span>
@@ -1822,13 +2018,13 @@
 <section class="section" id="cycles">
   <div class="container">
     <div class="reveal cycle-intro">
-      <div style="max-width: 620px;">
+      <div class="cycle-copy">
         <span class="eyebrow">Resilience</span>
         <h2>Shorter declines. Steadier recoveries.</h2>
         <p class="lead">
-          How far below its previous peak the portfolio fell in each major market
-          shock — and how long it took to climb back. Depth of loss works against
-          you for years; speed of recovery is what keeps compounding on your side.
+          How far each major shock took the portfolio below its peak, and how
+          long it took to climb back. Depth of loss works against you for years;
+          speed of recovery keeps compounding on your side.
         </p>
       </div>
       <ul class="viz-legend">
@@ -1845,7 +2041,7 @@
           <div class="uw-tip" id="uwTip"></div>
         </div>
       </div>
-      <p class="viz-note">Illustrative, for discussion only. Drawdown measures the fall from the highest point reached; recovery is the time to return to it. Diversification does not guarantee a profit or protect against loss.</p>
+      <p class="viz-note viz-note-wide">Illustrative, for discussion only. Drawdown is the fall from the highest point reached; recovery is the time to return to it. Diversification does not guarantee a profit or protect against loss.</p>
     </div>
 
     <div class="cycle-stats reveal" style="--d: 0.2s">
@@ -1862,7 +2058,7 @@
       <div class="cycle-stat">
         <div class="value">3</div>
         <div class="caption">Major crises navigated</div>
-        <div class="sub">since 2008 — and still compounding</div>
+        <div class="sub">since 2008, and still compounding</div>
       </div>
     </div>
   </div>
@@ -1879,7 +2075,7 @@
       <li>
         <span class="step">01</span>
         <h3>Discovery</h3>
-        <p>We map your full financial picture — assets, obligations, values, and the outcomes that matter most to you.</p>
+        <p>We map your full financial picture: assets, obligations, values, and the outcomes that matter most to you.</p>
       </li>
       <li>
         <span class="step">02</span>
@@ -1909,65 +2105,95 @@
       Ten years on, the relationship feels less like a service and more like a
       partnership we trust with the next generation."
     </blockquote>
-    <cite><strong>Jonathan &amp; Marissa Hale</strong> — Clients since 2014</cite>
+    <cite><strong>Jonathan &amp; Marissa Hale</strong>, Clients since 2014</cite>
+  </div>
+</section>
+
+<!-- ======= CONTACT ======= -->
+<section class="section section-contact" id="contact">
+  <div class="container">
+    <div class="cta-top reveal">
+      <span class="eyebrow">Get Started</span>
+      <h2>Your future deserves a thoughtful strategy.</h2>
+      <p class="lead">
+        Whether you're growing wealth, preparing for retirement, or planning your
+        legacy, Verrow Capital helps you move forward with clarity, discipline,
+        and long-term confidence.
+      </p>
+      <a class="btn-light" href="consultation.html">Schedule a Consultation</a>
+    </div>
+
+    <ol class="cta-steps reveal" style="--d: 0.15s">
+      <li>
+        <span class="step" aria-hidden="true">01</span>
+        <h3>Start a conversation</h3>
+        <p>A short introductory call to understand your situation, your horizon, and what you want your capital to do.</p>
+      </li>
+      <li>
+        <span class="step" aria-hidden="true">02</span>
+        <h3>Review the fit</h3>
+        <p>We outline how we would work together, the scope of advice, and the fees involved. No obligation to proceed.</p>
+      </li>
+      <li>
+        <span class="step" aria-hidden="true">03</span>
+        <h3>Build the plan</h3>
+        <p>A written strategy covering structure, allocation, and the review cadence that keeps it aligned over time.</p>
+      </li>
+    </ol>
+
+    <div class="cta-details reveal" style="--d: 0.25s">
+      <span>New York, NY</span>
+      <span>Replies within a day</span>
+      <a href="mailto:hello@verrowcapital.com">hello@verrowcapital.com</a>
+    </div>
   </div>
 </section>
 
 <!-- ======= FOOTER ======= -->
-<section class="site-foot" id="contact">
-  <div class="cta-top reveal">
-    <span class="eyebrow">Get Started</span>
-    <h2>Your future deserves a thoughtful strategy.</h2>
-    <p class="lead">
-      Whether you're growing wealth, preparing for retirement, or planning your
-      legacy — Verrow Capital helps you move forward with clarity, discipline,
-      and long-term confidence.
-    </p>
-    <a class="btn-light" href="consultation.html">Schedule a Consultation</a>
-  </div>
-
-  <footer>
+<footer class="site-foot">
     <div class="footer-grid">
-      <div class="reveal" style="--d: 0s">
-        <h3 class="tagline">Guiding Wealth Through Every&nbsp;Chapter.</h3>
-        <form class="newsletter" id="newsletterForm">
-          <input type="email" placeholder="Email address" required aria-label="Email address" />
-          <button type="submit">Join Our Community</button>
-        </form>
-        <p class="newsletter-msg" id="newsletterMsg" role="status" hidden></p>
+      <div class="footer-cols">
+        <div class="reveal" style="--d: 0s">
+          <h3 class="tagline">Guiding Wealth Through Every&nbsp;Chapter.</h3>
+          <form class="newsletter" id="newsletterForm">
+            <input type="email" placeholder="Email address" required aria-label="Email address" />
+            <button type="submit">Join Our Community</button>
+          </form>
+          <p class="newsletter-msg" id="newsletterMsg" role="status" hidden></p>
+        </div>
+        <div class="reveal" style="--d: 0.12s">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#investing">Portfolio</a></li>
+            <li><a href="#cycles">Resilience</a></li>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="reveal" style="--d: 0.24s">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#wealth">Wealth Management</a></li>
+            <li><a href="#capital">Private Capital</a></li>
+            <li><a href="#advisory">Strategic Advisory</a></li>
+          </ul>
+        </div>
+        <div class="reveal" style="--d: 0.36s">
+          <h4>Contact</h4>
+          <address>
+            120 Harbor Street, Suite 40<br />
+            New York, NY 10001<br /><br />
+            +1 (555) 014-2000<br />
+            <a href="mailto:hello@verrowcapital.com">hello@verrowcapital.com</a>
+          </address>
+        </div>
       </div>
-      <div class="reveal" style="--d: 0.12s">
-        <h4>Navigation</h4>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#investing">Portfolio</a></li>
-          <li><a href="#cycles">Resilience</a></li>
-          <li><a href="#process">Process</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-      <div class="reveal" style="--d: 0.24s">
-        <h4>Services</h4>
-        <ul>
-          <li><a href="#wealth">Wealth Management</a></li>
-          <li><a href="#capital">Private Capital</a></li>
-          <li><a href="#advisory">Strategic Advisory</a></li>
-        </ul>
-      </div>
-      <div class="reveal" style="--d: 0.36s">
-        <h4>Contact</h4>
-        <address>
-          120 Harbor Street, Suite 40<br />
-          New York, NY 10001<br /><br />
-          +1 (555) 014-2000<br />
-          <a href="mailto:hello@verrowcapital.com">hello@verrowcapital.com</a>
-        </address>
-      </div>
-    </div>
 
-    <div class="watermark reveal-fade" style="--d: 0.2s" aria-hidden="true">Verrow&nbsp;Capital</div>
+      <div class="watermark reveal-fade" style="--d: 0.2s" aria-hidden="true"><span>Verrow&nbsp;Capital</span></div>
+    </div>
 
     <div class="footer-bottom reveal-fade" style="--d: 0.35s">
       <span>© 2026 Verrow Capital. All rights reserved.</span>
@@ -1978,10 +2204,10 @@
         <span>Investments involve risk.</span>
       </nav>
     </div>
-  </footer>
-</section>
+</footer>
 </main>
 
+<script src="assets/js/state.js"></script>
 <script>
   const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -2025,10 +2251,20 @@
   const bar = document.querySelector(".scroll-progress");
   const nav = document.querySelector(".nav");
   const root = document.documentElement;
+  const navState = Verrow.machine("nav", {
+    el: nav,
+    initial: "top",
+    states: {
+      top: { enter: "scrolled" },
+      scrolled: { leave: "top" }
+    },
+    // The class is derived from the machine, never toggled by hand.
+    render: (state) => nav.classList.toggle("scrolled", state === "scrolled")
+  });
   const onScroll = () => {
     const max = root.scrollHeight - root.clientHeight;
     bar.style.transform = "scaleX(" + (max > 0 ? root.scrollTop / max : 0) + ")";
-    nav.classList.toggle("scrolled", root.scrollTop > 40);
+    navState.send(root.scrollTop > 40 ? "enter" : "leave");
   };
 
   // Section spy: keep the current section marked in the nav
@@ -2051,6 +2287,9 @@
       if (on) s.a.setAttribute("aria-current", "true");
       else s.a.removeAttribute("aria-current");
     }
+    // Cheap read-out for tests and agents: which section the nav marks.
+    if (current) nav.setAttribute("data-section", (current.a.getAttribute("href") || "").replace("#", ""));
+    else nav.removeAttribute("data-section");
   };
 
   const onScrollAll = () => {
@@ -2064,22 +2303,40 @@
   const burger = document.querySelector(".nav-burger");
   const primaryNav = document.getElementById("primary-nav");
   const mobileNav = matchMedia("(max-width: 860px)");
-  const setMenu = (open) => {
-    nav.classList.toggle("menu-open", open);
-    if (burger) {
-      burger.setAttribute("aria-expanded", open ? "true" : "false");
-      burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  const menuState = Verrow.machine("mobile-menu", {
+    el: primaryNav || nav,
+    initial: "closed",
+    states: {
+      closed: { open: "open", toggle: "open" },
+      open: { close: "closed", toggle: "closed" }
+    },
+    // The panel class and the button's accessible state both come from here.
+    render: (state) => {
+      const open = state === "open";
+      nav.classList.toggle("menu-open", open);
+      if (burger) {
+        burger.setAttribute("aria-expanded", open ? "true" : "false");
+        burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      }
     }
-  };
+  });
   if (burger && primaryNav) {
-    burger.addEventListener("click", () => setMenu(!nav.classList.contains("menu-open")));
+    const closeMenu = (refocus) => {
+      menuState.send("close");
+      if (refocus) burger.focus();
+    };
+    burger.addEventListener("click", () => menuState.send("toggle"));
+    // A tap anywhere outside the bar dismisses the panel.
+    document.addEventListener("click", (e) => {
+      if (menuState.is("open") && !nav.contains(e.target)) closeMenu(false);
+    });
     nav.addEventListener("click", (e) => {
-      if (e.target.closest("a")) setMenu(false);
+      if (e.target.closest("a")) closeMenu(false);
     });
     addEventListener("keydown", (e) => {
-      if (e.key === "Escape") setMenu(false);
+      if (e.key === "Escape" && menuState.is("open")) closeMenu(true);
     });
-    mobileNav.addEventListener("change", () => setMenu(false));
+    mobileNav.addEventListener("change", () => closeMenu(false));
   }
 
   // Count-up stats
@@ -2148,6 +2405,15 @@
       '<circle id="hovDot" r="5" fill="#7ef0e0" stroke="#04121c" stroke-width="2"/>';
 
     const wrap = document.getElementById("chartWrap");
+    const chartState = Verrow.machine("chart-performance", {
+      el: wrap,
+      initial: "waiting",
+      states: {
+        waiting: { draw: "drawing" },
+        drawing: { done: "drawn" },
+        drawn: {}
+      }
+    });
     const line = svg.querySelector("#chartLine");
     const areaPath = svg.querySelector("#chartArea");
     const clipRect = svg.querySelector("#areaClipRect");
@@ -2220,6 +2486,7 @@
       if (prefersReduced) {
         line.style.strokeDashoffset = "0";
         clipRect.setAttribute("width", W);
+        chartState.send("done");
       } else {
         // Frame-by-frame draw: the line visibly travels from 2008 up to the peak
         line.style.strokeDashoffset = len;
@@ -2231,16 +2498,17 @@
           const p = Math.min((now - t0) / duration, 1);
           const eased = 1 - Math.pow(1 - p, 3); // ease-out cubic
           line.style.strokeDashoffset = String(len * (1 - eased));
-          // area fill only exists behind the line tip — shadow trails the sweep
+          // area fill only exists behind the line tip: shadow trails the sweep
           clipRect.setAttribute("width", PADX + eased * (W - PADX * 2) + 2);
           if (p < 1) {
             requestAnimationFrame(drawTick);
           } else {
             clipRect.setAttribute("width", W);
+            chartState.send("done");
           }
         };
         requestAnimationFrame(drawTick);
-        // land the tooltip on the peak after the draw — unless the pointer
+        // land the tooltip on the peak after the draw, unless the pointer
         // is over the chart, in which case leave it where the user put it
         setTimeout(() => { if (!wrap.matches(":hover")) showAt(peak); }, duration + 150);
       }
@@ -2253,6 +2521,7 @@
       if (prefersReduced || (r.top < innerHeight * 0.85 && r.bottom > 0)) {
         revealed = true;
         wrap.classList.add("on");
+        chartState.send("draw");
         render();
         return true;
       }
@@ -2316,6 +2585,15 @@
     const segs = Array.from(svg.querySelectorAll(".ring-seg"));
     const legend = document.getElementById("ringLegend");
     const row = document.getElementById("ringRow");
+    const chartState = Verrow.machine("chart-allocation", {
+      el: row || svg,
+      initial: "waiting",
+      states: {
+        waiting: { draw: "drawing" },
+        drawing: { done: "drawn" },
+        drawn: {}
+      }
+    });
     const centerVal = document.querySelector(".ring-center .val");
     const centerCap = document.querySelector(".ring-center .cap");
 
@@ -2338,9 +2616,11 @@
     const finish = () => {
       segs.forEach((s, i) => s.setAttribute("stroke-dasharray", geo[i].len + " " + (C - geo[i].len)));
       setActive(null);
+      chartState.send("done");
     };
 
     whenVisible(row || svg, () => {
+      chartState.send("draw");
       if (prefersReduced) { finish(); return; }
       const D = 1500;
       const t0 = performance.now();
@@ -2352,7 +2632,11 @@
           const l = geo[i].len * eased;
           s.setAttribute("stroke-dasharray", l + " " + (C - l));
         });
-        if (p < 1) requestAnimationFrame(step); else setActive(null);
+        if (p < 1) requestAnimationFrame(step);
+        else {
+          setActive(null);
+          chartState.send("done");
+        }
       };
       requestAnimationFrame(step);
     });
@@ -2436,16 +2720,31 @@
     const wrap = document.getElementById("scatterWrap");
     const rect = svg.querySelector("#frontierRect");
     const tip = document.getElementById("scatterTip");
+    const chartState = Verrow.machine("chart-scatter", {
+      el: wrap,
+      initial: "waiting",
+      states: {
+        waiting: { draw: "drawing" },
+        drawing: { done: "drawn" },
+        drawn: {}
+      }
+    });
 
     const reveal = () => {
       wrap.classList.add("on");
-      if (prefersReduced) { rect.setAttribute("width", W); return; }
+      chartState.send("draw");
+      if (prefersReduced) {
+        rect.setAttribute("width", W);
+        chartState.send("done");
+        return;
+      }
       const D = 1250;
       const t0 = performance.now();
       const step = (now) => {
         const p = Math.min((now - t0) / D, 1);
         rect.setAttribute("width", (1 - Math.pow(1 - p, 3)) * (RT - L + 6) + L);
         if (p < 1) requestAnimationFrame(step);
+        else chartState.send("done");
       };
       requestAnimationFrame(step);
     };
@@ -2580,6 +2879,15 @@
     svg.innerHTML = parts.join("");
 
     const wrap = document.getElementById("uwWrap");
+    const chartState = Verrow.machine("chart-resilience", {
+      el: wrap,
+      initial: "waiting",
+      states: {
+        waiting: { draw: "drawing" },
+        drawing: { done: "drawn" },
+        drawn: {}
+      }
+    });
     const rect = svg.querySelector("#uwRect");
     const hov = svg.querySelector("#uwHov");
     const dotI = svg.querySelector("#uwDotI");
@@ -2612,9 +2920,11 @@
     const finish = () => {
       rect.setAttribute("width", RT - L + 4);
       wrap.classList.add("on");
+      chartState.send("done");
     };
 
     whenVisible(wrap, () => {
+      chartState.send("draw");
       if (prefersReduced) { finish(); mark(26); return; }
       const D = 1600;
       const t0 = performance.now();
@@ -2625,6 +2935,7 @@
           requestAnimationFrame(step);
         } else {
           wrap.classList.add("on");
+          chartState.send("done");
           // park the marker on the worst point, unless the pointer is on the chart
           setTimeout(() => { if (!wrap.matches(":hover")) mark(26); }, 250);
         }
@@ -2641,51 +2952,92 @@
     wrap.addEventListener("mouseleave", () => mark(26));
   })();
 
-  // Newsletter signup — posts to the /api/contact function
+  // Newsletter signup: posts to the /api/contact function. The state machine
+  // owns idle -> sending -> sent | error, so the button, the message and the
+  // request can never disagree, and a stalled request times out.
   const form = document.getElementById("newsletterForm");
   if (form) {
-    const msg = document.getElementById("newsletterMsg");
-    const button = form.querySelector("button");
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      if (button.disabled) return;
-      const original = button.textContent;
-      button.disabled = true;
-      button.textContent = "Joining…";
-      try {
-        const res = await fetch("/api/contact", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ type: "newsletter", email: form.querySelector("input").value.trim() }),
-        });
-        if (!res.ok) throw new Error("Request failed (" + res.status + ")");
-        button.textContent = "You're on the list ✓";
-        button.classList.add("success");
+    const newsletterButton = form.querySelector("button");
+    Verrow.form({
+      name: "newsletter-form",
+      form,
+      button: newsletterButton,
+      message: document.getElementById("newsletterMsg"),
+      pendingLabel: "Joining…",
+      successLabel: "You're on the list ✓",
+      payload: () => ({
+        type: "newsletter",
+        email: form.querySelector("input").value.trim()
+      }),
+      onSuccess: () => {
+        newsletterButton.classList.add("success");
         form.querySelector("input").value = "";
-        if (msg) { msg.hidden = true; msg.textContent = ""; msg.classList.remove("error"); }
-      } catch (err) {
-        button.disabled = false;
-        button.textContent = original;
-        if (msg) {
-          msg.textContent = "Something went wrong — please try again, or email hello@verrowcapital.com.";
-          msg.classList.add("error");
-          msg.hidden = false;
-        }
       }
     });
   }
 
-  // Hero mouse parallax (fine pointers only)
-  const hero = document.querySelector(".hero");
-  const heroBg = document.querySelector(".hero-bg");
-  if (hero && heroBg && matchMedia("(pointer: fine)").matches && !prefersReduced) {
-    hero.addEventListener("mousemove", (e) => {
-      const r = hero.getBoundingClientRect();
-      const x = (e.clientX / r.width - 0.5) * 18;
-      const y = (e.clientY / r.height - 0.5) * 12;
-      heroBg.style.setProperty("--mx", x + "px");
-      heroBg.style.setProperty("--my", y + "px");
+  // Hero loop: one machine owns the playback state (playing, paused, blocked,
+  // still). Decode only while the hero is on screen and the tab is visible.
+  const heroVideo = document.querySelector(".hero-video");
+  if (heroVideo) {
+    const heroMedia = heroVideo.closest(".hero-media") || heroVideo;
+    const heroState = Verrow.machine("hero-video", {
+      el: heroMedia,
+      initial: prefersReduced ? "still" : "idle",
+      states: {
+        idle: { play: "playing", blocked: "blocked", still: "still" },
+        playing: { pause: "paused", blocked: "blocked" },
+        paused: { play: "playing" },
+        blocked: { play: "playing" },
+        still: {}
+      }
     });
+
+    heroVideo.addEventListener("play", () => heroState.send("play"));
+    heroVideo.addEventListener("playing", () => heroState.send("play"));
+    heroVideo.addEventListener("pause", () => heroState.send("pause"));
+    // The autoplay attribute can start the loop before this script runs, so
+    // reconcile with the element's real state once.
+    if (!prefersReduced && !heroVideo.paused) heroState.send("play");
+
+    if (prefersReduced) {
+      heroVideo.removeAttribute("autoplay");
+      heroVideo.pause();
+    } else {
+      let inView = true;
+
+      const playHero = () => {
+        const started = heroVideo.play();
+        if (started && started.then) {
+          started.then(() => heroState.send("play")).catch(() => heroState.send("blocked"));
+        }
+      };
+
+      // One decision, used by both the observer and the tab listener, so the
+      // two can never fight over playback.
+      const syncHero = () => {
+        if (document.hidden || !inView) heroVideo.pause();
+        else playHero();
+      };
+
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            inView = entry.isIntersecting;
+            syncHero();
+          });
+        }).observe(heroVideo);
+      }
+
+      document.addEventListener("visibilitychange", syncHero);
+
+      // A blocked autoplay can recover on the first interaction.
+      document.addEventListener("pointerdown", () => {
+        if (heroState.is("blocked")) playHero();
+      }, { once: true, passive: true });
+
+      playHero();
+    }
   }
 
   // Approach rows: staggered slide-in
@@ -2734,19 +3086,108 @@
     }
   };
 
-  // Footer watermark: slow drift with scroll — it rises gently as the wordmark
-  // travels up through the viewport, capped at 30px on top of the -10% base so
-  // it stays clear above the legal bar.
+  // Footer watermark: the giant wordmark in the space between the link
+  // columns above and the legal bar below. It grows as large as that space
+  // allows, keeping a small even gap (WM_GAP) from the text above and below,
+  // and it never runs wider than the footer's measure. The CSS font-size is
+  // the no-JS fallback; once scripted it is absolutely placed in the strip.
+  const WM_GAP = 10; // px of clear space above and below the letters
   const wm = document.querySelector(".watermark");
-  const updateWatermark = () => {
-    if (!wm) return;
-    const r = wm.getBoundingClientRect();
-    const off = Math.max(-30, Math.min(0, (r.top - innerHeight) * 0.35));
-    wm.style.transform = "translateY(calc(-10% + " + off + "px))";
+  const wmInner = wm && wm.firstElementChild;
+  const wmGrid = wm && wm.parentElement;
+  const wmFooter = wmGrid && wmGrid.parentElement;
+  const wmBottom = wmFooter && wmFooter.querySelector(".footer-bottom");
+  const wmCols = wmGrid && wmGrid.querySelector(".footer-cols");
+  const wmRange = document.createRange();
+  let wmReady = false; // true once the script has taken over the layout
+  const wordmarkState = wm ? Verrow.machine("wordmark", {
+    el: wm,
+    initial: "fitting",
+    states: {
+      fitting: { fitted: "fitted" },
+      fitted: {}
+    }
+  }) : null;
+
+  // Where the wordmark's own box sits versus the footer's, from client rects.
+  // The wordmark is always the footer's last child and is taken out of the
+  // flow when framed, so this is stable; the reveal fades are only opacity
+  // transitions, so they cannot skew these numbers.
+  const wmOffsetInFooter = () => {
+    const fr = wmFooter.getBoundingClientRect();
+    const wr = wm.getBoundingClientRect();
+    return { top: wr.top - fr.top, height: fr.height };
   };
 
+  const fitWatermark = () => {
+    if (!wm || !wmInner || !wmFooter || !wmBottom || !wmCols) return;
+    wm.classList.add("frame");
+
+    // The free strip: from the bottom of the link columns to the top of the
+    // legal bar, both measured against the footer. The wordmark is absolutely
+    // placed here, so it can never move the columns or the bar.
+    // The wordmark is positioned inside the grid (its offsetParent), so the
+    // strip is measured from the grid's own top edge. Horizontally it is
+    // pulled back out to the footer's full width.
+    const gr = wm.offsetParent.getBoundingClientRect();
+    const top = wmCols.getBoundingClientRect().bottom - gr.top;
+    const avail = wmBottom.getBoundingClientRect().top - gr.top - top;
+    // Ignore anything that cannot be the real strip (not laid out yet).
+    if (!(avail > 10) || avail > wmFooter.getBoundingClientRect().height) return;
+    // The wordmark spans the grid's padded content box (the same measure as
+    // the link columns), so nothing it is sized to can spill sideways.
+    const cs = getComputedStyle(wmGrid);
+    const gutL = parseFloat(cs.paddingLeft) || 0;
+    const gutR = parseFloat(cs.paddingRight) || 0;
+    wm.style.right = "auto";
+    wm.style.width = (wmGrid.clientWidth - gutL - gutR) + "px";
+    wm.style.left = gutL + "px";
+    wm.style.top = top + "px";
+    wm.style.height = avail + "px";
+
+    // Measure the letters at a known 100px: how tall and wide one em of them
+    // is, and so the size that fills either the strip or the footer's width.
+    wm.style.fontSize = "100px";
+    wmRange.selectNodeContents(wmInner);
+    const box100 = wmRange.getBoundingClientRect();
+    if (!box100.width || !box100.height) return;
+    const perEmH = box100.height / 100;
+    const perEmW = box100.width / 100;
+    const measure = wm.getBoundingClientRect().width - 24; // a small edge gutter each side
+
+    // Fill the strip down to WM_GAP above and below, but never spill out to
+    // the sides. Whichever limit is tighter wins.
+    const heightFont = (avail - WM_GAP * 2) / perEmH;
+    const widthFont = measure > 0 ? measure / perEmW : Infinity;
+    const font = Math.max(12, Math.min(heightFont, widthFont));
+    wm.style.fontSize = font + "px";
+
+    // The letters overshoot their line box (tall caps and descenders). Place
+    // the line so the ink, not the line box, sits dead centre of the strip.
+    wm.style.setProperty("--wm-offset", "0px");
+    const inkH = font * perEmH;
+    wmRange.selectNodeContents(wmInner);
+    const ink = wmRange.getBoundingClientRect();
+    const inkFromStripTop = ink.top - wm.getBoundingClientRect().top;
+    const offset = (avail - inkH) / 2 - inkFromStripTop;
+    wm.style.setProperty("--wm-offset", offset.toFixed(2) + "px");
+
+    if (!wmReady) {
+      wmReady = true;
+      if (wordmarkState) wordmarkState.send("fitted");
+    }
+  };
+
+  fitWatermark();
+  // Re-fit after the first paint: the reveal fade and web fonts both settle
+  // after the initial call, and the wordmark's size depends on both.
+  requestAnimationFrame(() => requestAnimationFrame(fitWatermark));
+  addEventListener("load", fitWatermark);
+  addEventListener("resize", () => requestAnimationFrame(fitWatermark));
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitWatermark);
+
   if (!prefersReduced) {
-    const onUpdate = () => { updateProcessLine(); updateQuote(); updateWatermark(); };
+    const onUpdate = () => { updateProcessLine(); updateQuote(); if (!wmReady) fitWatermark(); };
     addEventListener("scroll", onUpdate, { passive: true });
 
     // rAF-driven fallback: keeps effects working even when scroll events stall
@@ -2765,12 +3206,15 @@
       }
     }
     function tick() {
-      onUpdate();
+      if (!wmReady) fitWatermark();
       updateReveals();
       updateStats();
       requestAnimationFrame(tick);
     }
     tick();
+  }
+  if (prefersReduced) {
+    addEventListener("scroll", () => { if (!wmReady) fitWatermark(); }, { passive: true });
   }
   document.querySelectorAll(".reveal, .reveal-fade").forEach((el) => {
     const r = el.getBoundingClientRect();

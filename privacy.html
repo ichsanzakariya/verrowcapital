@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Privacy Policy — Verrow Capital</title>
+<title>Verrow Capital</title>
+<link rel="icon" href="assets/favicon/favicon.ico" sizes="32x32" />
+<link rel="icon" href="assets/favicon/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="assets/favicon/favicon-32.png" type="image/png" sizes="32x32" />
+<link rel="icon" href="assets/favicon/favicon-192.png" type="image/png" sizes="192x192" />
+<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" sizes="180x180" />
+<link rel="manifest" href="site.webmanifest" />
 <meta name="description" content="How Verrow Capital collects, uses, and protects your personal information." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -61,7 +67,7 @@
     padding: 88px 24px 120px;
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.9s ease 0.1s, transform 0.9s ease 0.1s;
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
 
   .page.in { opacity: 1; transform: none; }
@@ -109,20 +115,13 @@
   a { color: var(--teal-bright); }
 
   /* ------------ Motion ------------ */
-  /* Headings and paragraphs arrive in sequence as the page fades up, and the
-     back link carries the same underline sweep as the main site. */
-  .page.in > * { animation: pageIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
-  .page.in > *:nth-child(1) { animation-delay: 0.15s; }
-  .page.in > *:nth-child(2) { animation-delay: 0.22s; }
-  .page.in > *:nth-child(3) { animation-delay: 0.29s; }
-  .page.in > *:nth-child(4) { animation-delay: 0.36s; }
-  .page.in > *:nth-child(5) { animation-delay: 0.43s; }
-  .page.in > *:nth-child(6) { animation-delay: 0.5s; }
-  .page.in > *:nth-child(7) { animation-delay: 0.57s; }
-  .page.in > *:nth-child(8) { animation-delay: 0.64s; }
-  .page.in > *:nth-child(n + 9) { animation-delay: 0.71s; }
+  /* Every block arrives as it scrolls into view, and the back link carries the
+     same underline sweep as the main site. */
+  .rv { opacity: 0; }
 
-  @keyframes pageIn {
+  .rv.on { animation: rvIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--rv-d, 0s) both; }
+
+  @keyframes rvIn {
     from { opacity: 0; filter: blur(7px); transform: translateY(16px); }
     to   { opacity: 1; filter: blur(0); transform: translateY(0); }
   }
@@ -147,7 +146,7 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .page { opacity: 1; transform: none; transition: none; }
-    .page.in > * { animation: none; }
+    .rv { opacity: 1; animation: none; }
     .back::after { display: none; }
   }
 
@@ -173,14 +172,14 @@
 
   <h2>Information We Collect</h2>
   <ul>
-    <li><strong>Contact details</strong> you provide voluntarily — such as your email address when subscribing to our newsletter or requesting a consultation.</li>
+    <li><strong>Contact details</strong> you provide voluntarily, such as your email address when subscribing to our newsletter or requesting a consultation.</li>
     <li><strong>Correspondence</strong> you send us by email or through forms on the site.</li>
     <li><strong>Basic technical data</strong> such as browser type and pages visited, used only in aggregate to understand how the site is used.</li>
   </ul>
   <p>We do not collect sensitive personal information through this website, and we never sell or rent personal information to third parties.</p>
 
   <h2>How We Use Information</h2>
-  <p>Information you provide is used solely to respond to your enquiries, deliver materials you have requested, and — where you have opted in — send occasional insights and updates. Every marketing email includes a one-click unsubscribe.</p>
+  <p>Information you provide is used solely to respond to your enquiries, deliver materials you have requested, and, where you have opted in, send occasional insights and updates. Every marketing email includes a one-click unsubscribe.</p>
 
   <h2>Data Retention &amp; Security</h2>
   <p>We keep personal information only as long as necessary for the purposes described above or as required by law. Reasonable administrative and technical safeguards are in place to protect it against loss, misuse, and unauthorized access.</p>
@@ -198,6 +197,7 @@
   <p>Questions about this policy can be directed to Verrow Capital, 120 Harbor Street, Suite 40, New York, NY 10001, or by email at <a href="mailto:hello@verrowcapital.com">hello@verrowcapital.com</a>.</p>
 </main>
 
+<script src="assets/js/state.js"></script>
 <script>
   const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const page = document.getElementById("page");
@@ -207,6 +207,13 @@
   } else {
     page.classList.add("in");
   }
+
+  // Scroll reveal: the shared runtime marks each block, staggers the first
+  // screen top to bottom, and reveals the rest as it enters the viewport.
+  Verrow.reveal([
+    ".page > *:not(ul)",
+    ".page > ul > li"
+  ]);
 </script>
 
 </body>
